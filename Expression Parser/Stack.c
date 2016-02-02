@@ -19,14 +19,11 @@ Stack* Init(int val) {
     newStack->data = val;
     newStack->next = NULL;
     
-    //tail = newStack;
-    //head = tail;
-    
     return newStack;
 }
 
 void push(Stack **head, int val) {
-    Stack *newStack = malloc(sizeof(Stack));
+    Stack *newStack = (Stack *) malloc(sizeof(Stack));
     
     newStack->data = val;
     newStack->next = *head;
@@ -46,6 +43,22 @@ int pop(Stack **head){
     *head = newStack;
     
     return retval;
+}
+
+int peek(Stack **head) {
+    if (!isEmpty(*head)) {
+        return (*head)->data;
+    }
+    return -1;
+}
+
+int isEmpty(Stack *head) {
+    
+    if (head == NULL) {
+        return 1;
+    }
+    
+    return 0;
 }
 
 void Display(Stack *head) {

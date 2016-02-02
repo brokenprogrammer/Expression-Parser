@@ -16,14 +16,13 @@ typedef struct Stack {
     struct Stack *next;
 }Stack;
 
-//Stack *head = NULL;
-//Stack *tail = NULL;
-
 Stack* Init(int val);
 
-void Display(Stack *head);
 void push(Stack **head, int val);
 int pop(Stack **head);
+int peek(Stack **head);
+
 int isEmpty(Stack *head);
+void Display(Stack *head);
 
 #endif /* Stack_h */
