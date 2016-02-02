@@ -1,15 +1,14 @@
 //
-//  main.c
+//  Stack.h
 //  Expression Parser
 //
 //  Created by Oskar Mendel on 2/2/16.
 //  Copyright © 2016 Oskar Mendel. All rights reserved.
 //
 
+#ifndef Stack_h
+#define Stack_h
+
 #include <stdio.h>
 
-int main(int argc, const char * argv[]) {
-    // insert code here....
-    printf("Hello, World!\n");
-    return 0;
-}
+#endif /* Stack_h */
