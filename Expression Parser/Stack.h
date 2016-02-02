@@ -11,4 +11,19 @@
 
 #include <stdio.h>
 
+typedef struct Stack {
+    int data;
+    struct Stack *next;
+}Stack;
+
+//Stack *head = NULL;
+//Stack *tail = NULL;
+
+Stack* Init(int val);
+
+void Display(Stack *head);
+void push(Stack **head, int val);
+int pop(Stack **head);
+int isEmpty(Stack *head);
+
 #endif /* Stack_h */
