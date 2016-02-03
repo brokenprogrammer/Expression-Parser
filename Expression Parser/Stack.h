@@ -33,6 +33,7 @@
 
 typedef struct Stack {
     int data;
+    int size;
     struct Stack *next;
 }Stack;
 
@@ -41,6 +42,7 @@ Stack* initWithData(int val);
 void push(Stack **head, int val);
 int pop(Stack **head);
 int peek(Stack **head);
+void deleteStack(Stack *head);
 
 int isEmpty(Stack *head);
 void display(Stack *head);
