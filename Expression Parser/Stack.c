@@ -49,6 +49,7 @@ Stack* initWithData(int val) {
     }
     
     newStack->data = val;
+    newStack->size = 1;
     newStack->next = NULL;
     
     return newStack;
@@ -70,6 +71,11 @@ void push(Stack **head, int val) {
     
     newStack->data = val;
     newStack->next = *head;
+    if (!isEmpty(*head)) {
+        newStack->size = newStack->next->size + 1;
+    } else {
+        newStack->size = 1;
+    }
     *head = newStack;
 }
 
@@ -116,6 +122,10 @@ int peek(Stack **head) {
     return -1;
 }
 
+void deleteStack(Stack *head) {
+    
+}
+
 /**
  * isEmpty checks if the Stack passed into the parameters is empty.
  *
@@ -140,9 +150,9 @@ int isEmpty(Stack *head) {
  */
 void display(Stack *head) {
     Stack *current = head;
-    
+
     while (current != NULL) {
-        printf("Stack Data: %i\n", current->data);
+        printf("Stack Data: %i, Stack Size: %i\n", current->data, current->size);
         current = current->next;
     }
 }
