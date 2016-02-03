@@ -66,5 +66,31 @@ int main(int argc, const char * argv[]) {
     
     printf("Peeking on the top of the stack: %i\n", peek(&root));
     
+    push(&root, 10);
+    push(&root, 15);
+    push(&root, 20);
+    
+    display(root);
+    
+    deleteStack(&root);
+    
+    display(root);
+    
+    for (int x = 0; x < 10000; x++) {
+        push(&root, x);
+    }
+    
+   
+    deleteStack(&root);
+    
+    int c = getchar();
+    
+    for (long int y = 0; y < 1000000000; y++) {
+        
+    }
+    
+    push(&root, 20);
+    display(root);
+    
     return 0;
 }
