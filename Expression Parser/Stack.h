@@ -31,15 +31,22 @@
 
 #include <stdio.h>
 
+union expressionContent {
+    int expressionOperand;
+    char expressionOperator;
+};
+
 typedef struct Stack {
-    int data;
+    union expressionContent data;
     int size;
+    int isOperator;
     struct Stack *next;
 }Stack;
 
-Stack* initWithData(int val);
+Stack* initWithOperand(int val);
+Stack* initWithOperator(char val);
 
-void push(Stack **head, int val);
+void push(Stack **head, union expressionContent val, int isOperator);
 int pop(Stack **head);
 int peek(Stack **head);
 void deleteStack(Stack **head);

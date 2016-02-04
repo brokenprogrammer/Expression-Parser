@@ -36,20 +36,50 @@
  * from the parameters and setting the next Stack it points to to NULL.
  * This initial Stack will serve as the bottom of the stack so it will never
  * point to another Stack with its next property.
+ * This initializes a stack that only accepts integers.
  *
  * @param val - Value to place in the Stack structures data property.
  *
  * @returns pointer to the just initialized Stack structure(object).
  */
-Stack* initWithData(int val) {
+Stack* initWithOperand(int val) {
     Stack *newStack = (Stack *) malloc(sizeof(Stack));
     
     if(newStack == NULL) {
         return NULL;
     }
     
-    newStack->data = val;
+    newStack->data.expressionOperand = val;
     newStack->size = 1;
+    newStack->isOperator = 0;
+    newStack->next = NULL;
+    
+    return newStack;
+}
+
+/**
+ * initWithOperator initializes a new Stack by allocating a new pointer with
+ * the ammount of memory a Stack needs. Then after checking if the newly
+ * created stack is NULL or not its values are initialized by using the value
+ * from the parameters and setting the next Stack it points to to NULL.
+ * This initial Stack will serve as the bottom of the stack so it will never
+ * point to another Stack with its next property.
+ * This initializes a stack that only accepts chars.
+ *
+ * @param val - Value to place in the Stack structures data property.
+ *
+ * @returns pointer to the just initialized Stack structure(object).
+ */
+Stack* initWithOperator(char val) {
+    Stack *newStack = (Stack *) malloc(sizeof(Stack));
+    
+    if(newStack == NULL) {
+        return NULL;
+    }
+    
+    newStack->data.expressionOperator = val;
+    newStack->size = 1;
+    newStack->isOperator = 1;
     newStack->next = NULL;
     
     return newStack;
@@ -66,10 +96,16 @@ Stack* initWithData(int val) {
  * make it easier by letting us change the entire head Stack from this function.
  * @param val - Value to place in the Stack structures data property.
  */
-void push(Stack **head, int val) {
+void push(Stack **head, union expressionContent val, int isOperator) {
     Stack *newStack = (Stack *) malloc(sizeof(Stack));
     
-    newStack->data = val;
+    if (isOperator >= 1) {
+        newStack->data.expressionOperator = val.expressionOperator;
+        newStack->isOperator = 1;
+    } else {
+        newStack->data.expressionOperand = val.expressionOperand;
+        newStack->isOperator = 0;
+    }
     newStack->next = *head;
     if (!isEmpty(*head)) {
         newStack->size = newStack->next->size + 1;
@@ -98,7 +134,13 @@ int pop(Stack **head){
     }
     
     Stack *newStack = (*head)->next;
-    int retval = (*head)->data;
+    int retval;
+    
+    if ((*head)->isOperator) {
+        retval = (*head)->data.expressionOperator;
+    } else {
+        retval = (*head)->data.expressionOperand;
+    }
     free(*head);
     *head = newStack;
     
@@ -117,7 +159,11 @@ int pop(Stack **head){
  */
 int peek(Stack **head) {
     if (!isEmpty(*head)) {
-        return (*head)->data;
+        if (!(*head)->isOperator) {
+            return (*head)->data.expressionOperand;
+        } else {
+            return (*head)->data.expressionOperator;
+        }
     }
     return -1;
 }
@@ -163,9 +209,11 @@ int isEmpty(Stack *head) {
  */
 void display(Stack *head) {
     Stack *current = head;
-
+    
     while (current != NULL) {
-        printf("Stack Data: %i, Stack Size: %i\n", current->data, current->size);
+        if (!current->isOperator) {
+            printf("Stack Data: %i, Stack Size: %i\n", current->data.expressionOperand, current->size);
+        }
         current = current->next;
     }
 }

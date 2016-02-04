@@ -34,11 +34,15 @@ int main(int argc, const char * argv[]) {
     // insert code here....
     printf("Hello, World!\n");
     
-    Stack *root = initWithData(5);
+    Stack *root = initWithOperand(5);
+    union expressionContent content;
     
-    push(&root, 10);
-    push(&root, 15);
-    push(&root, 20);
+    content.expressionOperand = 5;
+    push(&root, content, 0);
+    content.expressionOperand = 10;
+    push(&root, content, 0);
+    content.expressionOperand = 10;
+    push(&root, content, 0);
     
     display(root);
     
@@ -54,7 +58,8 @@ int main(int argc, const char * argv[]) {
         printf("The Stack is empty\n");
     }
     
-    push(&root, 100);
+    content.expressionOperand = 100;
+    push(&root, content, 0);
     
     if(!isEmpty(root)) {
         printf("The Stack is not empty\n");
@@ -66,9 +71,12 @@ int main(int argc, const char * argv[]) {
     
     printf("Peeking on the top of the stack: %i\n", peek(&root));
     
-    push(&root, 10);
-    push(&root, 15);
-    push(&root, 20);
+    content.expressionOperand = 10;
+    push(&root, content, 0);
+    content.expressionOperand = 15;
+    push(&root, content, 0);
+    content.expressionOperand = 20;
+    push(&root, content, 0);
     
     display(root);
     
@@ -77,19 +85,15 @@ int main(int argc, const char * argv[]) {
     display(root);
     
     for (int x = 0; x < 10000; x++) {
-        push(&root, x);
+        content.expressionOperand = x;
+        push(&root, content, 0);
     }
-    
    
     deleteStack(&root);
     
-    int c = getchar();
-    
-    for (long int y = 0; y < 1000000000; y++) {
-        
-    }
-    
-    push(&root, 20);
+    content.expressionOperand = 55;
+    push(&root, content, 0);
+    push(&root, content, 0);
     display(root);
     
     return 0;
