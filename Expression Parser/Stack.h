@@ -46,7 +46,8 @@ typedef struct Stack {
 Stack* initWithOperand(int val);
 Stack* initWithOperator(char val);
 
-void push(Stack **head, union expressionContent val, int isOperator);
+void pushOperand(Stack **head, int val);
+void pushOperator(Stack **head, char val);
 int pop(Stack **head);
 int peek(Stack **head);
 void deleteStack(Stack **head);

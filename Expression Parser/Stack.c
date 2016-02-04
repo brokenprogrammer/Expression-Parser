@@ -86,26 +86,59 @@ Stack* initWithOperator(char val) {
 }
 
 /**
- * push is pushing a new value to the top of the stack. Since the Stack
- * structure is a LIFO(Last In First Out) the value pushed is stored into a new
- * Stack structure and the old head Stack (Top) is getting replace with the new
- * Stack created. That makes it so that the new Stack is the new top pointing 
- * to the old top.
+ * pushOperand is pushing a new int value to the top of the stack. 
+ * Since the Stack structure is a LIFO(Last In First Out) the value pushed
+ * is stored into a new Stack structure and the old head Stack (Top) is getting 
+ * replace with the new Stack created. 
+ * That makes it so that the new Stack is the new top pointing to the old top.
  *
  * @param **head - Pointer to the pointer of head, we use pointer to pointers to
  * make it easier by letting us change the entire head Stack from this function.
- * @param val - Value to place in the Stack structures data property.
+ * @param val -  Integer value to place in the Stack structures data property.
+ * This integer will act as an operand that can be used in evaluations.
  */
-void push(Stack **head, union expressionContent val, int isOperator) {
+void pushOperand(Stack **head, int val) {
+    if (!isEmpty(*head) && (*head)->isOperator) {
+        printf("Cannot push operator to operand stack.\n");
+        return;
+    }
+    
     Stack *newStack = (Stack *) malloc(sizeof(Stack));
     
-    if (isOperator >= 1) {
-        newStack->data.expressionOperator = val.expressionOperator;
-        newStack->isOperator = 1;
+    newStack->data.expressionOperand = val;
+    newStack->isOperator = 0;
+    
+    newStack->next = *head;
+    if (!isEmpty(*head)) {
+        newStack->size = newStack->next->size + 1;
     } else {
-        newStack->data.expressionOperand = val.expressionOperand;
-        newStack->isOperator = 0;
+        newStack->size = 1;
     }
+    *head = newStack;
+}
+
+/**
+ * pushOperator is pushing a new char value to the top of the stack. 
+ * Since the Stack structure is a LIFO(Last In First Out) the value pushed 
+ * is stored into a new Stack structure and the old head Stack (Top) is getting
+ * replace with the new Stack created. 
+ * That makes it so that the new Stack is the new top pointing to the old top.
+ *
+ * @param **head - Pointer to the pointer of head, we use pointer to pointers to
+ * make it easier by letting us change the entire head Stack from this function.
+ * @param val - Char value to place in the Stack structures data property. This
+ * char will act as a operator like + - * and /
+ */
+void pushOperator(Stack **head, char val) {
+    if (!isEmpty(*head) && !(*head)->isOperator) {
+        printf("Cannot push operand to operator stack.\n");
+        return;
+    }
+    Stack *newStack = (Stack *) malloc(sizeof(Stack));
+    
+    newStack->data.expressionOperator = val;
+    newStack->isOperator = 1;
+    
     newStack->next = *head;
     if (!isEmpty(*head)) {
         newStack->size = newStack->next->size + 1;
