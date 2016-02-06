@@ -26,25 +26,11 @@
  * THE SOFTWARE.
  */
 
-#ifndef Stack_h
-#define Stack_h
+#ifndef Parser_h
+#define Parser_h
 
 #include <stdio.h>
 
-union expressionContent;
+void parseExpression(char string[]);
 
-typedef struct Stack Stack;
-
-Stack* initWithOperand(int val);
-Stack* initWithOperator(char val);
-
-void pushOperand(Stack **head, int val);
-void pushOperator(Stack **head, char val);
-int pop(Stack **head);
-int peek(Stack **head);
-void deleteStack(Stack **head);
-
-int isEmpty(Stack *head);
-void display(Stack *head);
-
-#endif /* Stack_h */
+#endif /* Parser_h */

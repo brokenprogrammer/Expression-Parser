@@ -5,7 +5,7 @@
  *
  * The MIT License (MIT)
  *
- * Copyright (c) 2016 The alg.js Project
+ * Copyright (C) 2016 The Expression-Parser Project
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,6 +28,18 @@
 
 #include "Stack.h"
 #include "stdlib.h"
+
+union expressionContent {
+    int expressionOperand;
+    char expressionOperator;
+};
+
+typedef struct Stack {
+    union expressionContent data;
+    int size;
+    int isOperator;
+    struct Stack *next;
+}Stack;
 
 /**
  * initWithData initializes a new Stack by allocating a new pointer with
