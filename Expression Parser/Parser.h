@@ -31,6 +31,6 @@
 
 #include <stdio.h>
 
-void parseExpression(char string[]);
+void parseExpression(char string[], int size);
 
 #endif /* Parser_h */

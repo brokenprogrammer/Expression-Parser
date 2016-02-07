@@ -27,7 +27,44 @@
  */
 
 #include "Parser.h"
+#include <stdlib.h>
+#include <errno.h>
 
-void parseExpression(char string[]) {
+typedef enum Operations {
+    operand,
+    constant,
+    unaryOperation,
+    binaryOperation
+}OpEnum;
+
+typedef struct opStack {
+    OpEnum opType;
+    
+    int operand;
+    double constant;
+    //Function pointer unary operation
+    //Function pointer binary operation
+    
+} opStack;
+
+void parseExpression(char string[], int size) {
+    //for (int x = 0; x < size; x++) {
+        //if (string[x] >= '0' && string[x] <= '9') {
+           // printf("Char at %i: %c\n", x, string[x]);
+        //}
+        //printf("Char at %i: %c\n", x, string[x]);
+    //}
+    char *end = string;
+    
+    for (long i = strtol(string, &end, 10); string != end; i = strtol(string, &end, 10)) {
+        printf("'%.*s' -> ", (int)(end-string), string);
+        string = end;
+        
+        if (errno == ERANGE){
+            printf("range error, got ");
+            errno = 0;
+        }
+        printf("%ld\n", i);
+    }
     
 }

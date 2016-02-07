@@ -29,6 +29,7 @@
 #include <stdio.h>
 #include "stdlib.h"
 #include "Stack.h"
+#include "Parser.h"
 
 int main(int argc, const char * argv[]) {
     // insert code here....
@@ -87,6 +88,8 @@ int main(int argc, const char * argv[]) {
     display(root);
     
     pushOperator(&root, 'b');
+    
+    parseExpression("55 + 5 / 3", 10);
     
     return 0;
 }
