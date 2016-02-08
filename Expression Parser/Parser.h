@@ -31,6 +31,9 @@
 
 #include <stdio.h>
 
+typedef struct opStack opStack;
+
 void parseExpression(char* string, int size);
+int convertVal(char *string);
 
 #endif /* Parser_h */

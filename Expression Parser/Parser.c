@@ -27,7 +27,9 @@
  */
 
 #include "Parser.h"
+#include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 typedef enum Operations {
     operand,
@@ -47,13 +49,25 @@ typedef struct opStack {
 } opStack;
 
 void parseExpression(char* string, int size) {
+    char *newstring = malloc(strlen(string) + 1);
+    strcpy(newstring, string);
+    
     char* pch;
-    printf ("Splitting string \"%s\" into tokens:\n", string);
-    pch = strtok(string, " ");
+    printf ("Splitting string \"%s\" into tokens:\n", newstring);
+    pch = strtok(newstring, " ");
     while (pch != NULL)
     {
-        printf ("%s\n",pch);
+        printf ("%s %lu\n",pch, strlen(pch));
+        if (isdigit(*pch)) {
+            convertVal(pch);
+        }
         pch = strtok (NULL, " ");
     }
     
+    free(newstring);
+}
+
+int convertVal(char *string) {
+    printf("Is Integer\n");
+    return 0;
 }

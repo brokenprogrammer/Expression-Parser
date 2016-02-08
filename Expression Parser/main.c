@@ -90,8 +90,9 @@ int main(int argc, const char * argv[]) {
     
     pushOperator(&root, 'b');
     
-    char str[] ="55 + 5 / 3";
-    parseExpression(str, 10);
+    opStack *operationStack;
+    //parseExpression(str, 10);
+    parseExpression("55 + 5 / 3", 10);
     
     return 0;
 }
