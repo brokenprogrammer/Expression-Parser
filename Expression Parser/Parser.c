@@ -27,8 +27,7 @@
  */
 
 #include "Parser.h"
-#include <stdlib.h>
-#include <errno.h>
+#include <string.h>
 
 typedef enum Operations {
     operand,
@@ -47,24 +46,14 @@ typedef struct opStack {
     
 } opStack;
 
-void parseExpression(char string[], int size) {
-    //for (int x = 0; x < size; x++) {
-        //if (string[x] >= '0' && string[x] <= '9') {
-           // printf("Char at %i: %c\n", x, string[x]);
-        //}
-        //printf("Char at %i: %c\n", x, string[x]);
-    //}
-    char *end = string;
-    
-    for (long i = strtol(string, &end, 10); string != end; i = strtol(string, &end, 10)) {
-        printf("'%.*s' -> ", (int)(end-string), string);
-        string = end;
-        
-        if (errno == ERANGE){
-            printf("range error, got ");
-            errno = 0;
-        }
-        printf("%ld\n", i);
+void parseExpression(char* string, int size) {
+    char* pch;
+    printf ("Splitting string \"%s\" into tokens:\n", string);
+    pch = strtok(string, " ");
+    while (pch != NULL)
+    {
+        printf ("%s\n",pch);
+        pch = strtok (NULL, " ");
     }
     
 }

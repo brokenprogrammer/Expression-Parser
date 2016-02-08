@@ -27,7 +27,8 @@
  */
 
 #include <stdio.h>
-#include "stdlib.h"
+#include <stdlib.h>
+#include <string.h>
 #include "Stack.h"
 #include "Parser.h"
 
@@ -89,7 +90,8 @@ int main(int argc, const char * argv[]) {
     
     pushOperator(&root, 'b');
     
-    parseExpression("55 + 5 / 3", 10);
+    char str[] ="55 + 5 / 3";
+    parseExpression(str, 10);
     
     return 0;
 }
