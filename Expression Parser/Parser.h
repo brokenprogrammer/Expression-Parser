@@ -31,9 +31,27 @@
 
 #include <stdio.h>
 
-typedef struct opStack opStack;
+typedef enum Operations {
+    operand,
+    constant,
+    unaryOperation,
+    binaryOperation
+}OpEnum;
+
+typedef struct opStack {
+    OpEnum opType;
+    
+    int operand;
+    double constant;
+    
+    int (*UnaryOperation)(int a);
+    int (*BinaryOperation)(int a, int b);
+    
+} opStack;
 
 void parseExpression(char* string, int size);
-int convertVal(char *string);
+int convertNumVal(char *string);
+
+int Add(int a, int b);
 
 #endif /* Parser_h */

@@ -31,23 +31,6 @@
 #include <string.h>
 #include <ctype.h>
 
-typedef enum Operations {
-    operand,
-    constant,
-    unaryOperation,
-    binaryOperation
-}OpEnum;
-
-typedef struct opStack {
-    OpEnum opType;
-    
-    int operand;
-    double constant;
-    //Function pointer unary operation
-    //Function pointer binary operation
-    
-} opStack;
-
 void parseExpression(char* string, int size) {
     char *newstring = malloc(strlen(string) + 1);
     strcpy(newstring, string);
@@ -58,16 +41,29 @@ void parseExpression(char* string, int size) {
     while (pch != NULL)
     {
         printf ("%s %lu\n",pch, strlen(pch));
+        
         if (isdigit(*pch)) {
-            convertVal(pch);
+            convertNumVal(pch);
         }
+        
         pch = strtok (NULL, " ");
     }
     
     free(newstring);
 }
 
-int convertVal(char *string) {
-    printf("Is Integer\n");
+int convertNumVal(char *string) {
+    char *end;
+    long int newLongInt = strtol(string, &end, 10);
+    int newInt;
+    
+    if (newInt <= INT32_MAX && newInt >= INT32_MIN) {
+        newInt = (int)newLongInt;
+    }
+    printf("Is Integer %i\n", newInt);
     return 0;
+}
+
+int Add(int a, int b){
+    return a + b;
 }
