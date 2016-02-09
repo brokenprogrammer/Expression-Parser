@@ -37,7 +37,7 @@
 /**
  * parseExpression
  */
-void parseExpression(char* string, int size, opStack **OpStack) {
+void parseExpression(char* string, int size, Stack **OpStack) {
     char *newstring = malloc(strlen(string) + 1);
     strcpy(newstring, string);
     
@@ -53,38 +53,39 @@ void parseExpression(char* string, int size, opStack **OpStack) {
         switch (*pch) {
             case '+':
                 printf("PLUSS\n");
-                OpStack[opPos] = malloc(sizeof(opStack));
+                
+                /*OpStack[opPos] = malloc(sizeof(opStack));
                 OpStack[opPos]->opType = binaryOperation;
-                OpStack[opPos]->BinaryOperation = Add;
+                OpStack[opPos]->BinaryOperation = Add;*/
                 opPos = opPos + 1;
                 break;
             case '-':
                 printf("Minus\n");
-                OpStack[opPos] = malloc(sizeof(opStack));
+                /*OpStack[opPos] = malloc(sizeof(opStack));
                 OpStack[opPos]->opType = binaryOperation;
-                OpStack[opPos]->BinaryOperation = Sub;
+                OpStack[opPos]->BinaryOperation = Sub;*/
                 opPos = opPos + 1;
                 break;
             case '/':
                 printf("Divide\n");
-                OpStack[opPos] = malloc(sizeof(opStack));
+                /*OpStack[opPos] = malloc(sizeof(opStack));
                 OpStack[opPos]->opType = binaryOperation;
-                OpStack[opPos]->BinaryOperation = Divide;
+                OpStack[opPos]->BinaryOperation = Divide;*/
                 opPos = opPos + 1;
                 break;
             case '*':
                 printf("Multiply\n");
-                OpStack[opPos] = malloc(sizeof(opStack));
+                /*OpStack[opPos] = malloc(sizeof(opStack));
                 OpStack[opPos]->opType = binaryOperation;
-                OpStack[opPos]->BinaryOperation = Multiply;
+                OpStack[opPos]->BinaryOperation = Multiply;*/
                 opPos = opPos + 1;
                 break;
             default:
                 if (isdigit(*pch)) {
-                    OpStack[opPos] = malloc(sizeof(opStack));
+                    /*OpStack[opPos] = malloc(sizeof(opStack));
                     OpStack[opPos]->opType = operand;
-                    OpStack[opPos]->operand = convertNumVal(pch);
-                    printf("Curr num: %i\n", OpStack[opPos]->operand);
+                    OpStack[opPos]->operand = convertNumVal(pch);*/
+                    //printf("Curr num: %i\n", OpStack[opPos]->operand);
                     opPos = opPos + 1;
                 }
                 break;

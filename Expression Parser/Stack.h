@@ -31,6 +31,13 @@
 
 #include <stdio.h>
 
+typedef enum Operations {
+    operand,
+    constant,
+    unaryOperation,
+    binaryOperation
+}OpEnum;
+
 union expressionContent;
 
 typedef struct Stack Stack;

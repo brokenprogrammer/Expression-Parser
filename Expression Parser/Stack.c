@@ -38,6 +38,15 @@ typedef struct Stack {
     union expressionContent data;
     int size;
     int isOperator;
+    
+    OpEnum opType;
+    
+    int operand;
+    double constant;
+    
+    int (*UnaryOperation)(int a);
+    int (*BinaryOperation)(int a, int b);
+    
     struct Stack *next;
 }Stack;
 

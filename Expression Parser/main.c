@@ -91,9 +91,9 @@ int main(int argc, const char * argv[]) {
     pushOperator(&root, 'b');
     
     
-    opStack *operationStack[10] = {0};
+    Stack *operationStack = initWithOperand(0);
     
-    parseExpression("55 + 5 / 3", 10, operationStack);
+    parseExpression("55 + 5 / 3", 10, &operationStack);
     
     return 0;
 }
