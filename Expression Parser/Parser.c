@@ -29,11 +29,19 @@
 #include "Parser.h"
 #include <stdlib.h>
 #include <string.h>
+#include <errno.h>
+#include <limits.h>
 #include <ctype.h>
+#include "EPMath.h"
 
-void parseExpression(char* string, int size) {
+/**
+ * parseExpression
+ */
+void parseExpression(char* string, int size, opStack **OpStack) {
     char *newstring = malloc(strlen(string) + 1);
     strcpy(newstring, string);
+    
+    int opPos = 0;
     
     char* pch;
     printf ("Splitting string \"%s\" into tokens:\n", newstring);
@@ -42,8 +50,44 @@ void parseExpression(char* string, int size) {
     {
         printf ("%s %lu\n",pch, strlen(pch));
         
-        if (isdigit(*pch)) {
-            convertNumVal(pch);
+        switch (*pch) {
+            case '+':
+                printf("PLUSS\n");
+                OpStack[opPos] = malloc(sizeof(opStack));
+                OpStack[opPos]->opType = binaryOperation;
+                OpStack[opPos]->BinaryOperation = Add;
+                opPos = opPos + 1;
+                break;
+            case '-':
+                printf("Minus\n");
+                OpStack[opPos] = malloc(sizeof(opStack));
+                OpStack[opPos]->opType = binaryOperation;
+                OpStack[opPos]->BinaryOperation = Sub;
+                opPos = opPos + 1;
+                break;
+            case '/':
+                printf("Divide\n");
+                OpStack[opPos] = malloc(sizeof(opStack));
+                OpStack[opPos]->opType = binaryOperation;
+                OpStack[opPos]->BinaryOperation = Divide;
+                opPos = opPos + 1;
+                break;
+            case '*':
+                printf("Multiply\n");
+                OpStack[opPos] = malloc(sizeof(opStack));
+                OpStack[opPos]->opType = binaryOperation;
+                OpStack[opPos]->BinaryOperation = Multiply;
+                opPos = opPos + 1;
+                break;
+            default:
+                if (isdigit(*pch)) {
+                    OpStack[opPos] = malloc(sizeof(opStack));
+                    OpStack[opPos]->opType = operand;
+                    OpStack[opPos]->operand = convertNumVal(pch);
+                    printf("Curr num: %i\n", OpStack[opPos]->operand);
+                    opPos = opPos + 1;
+                }
+                break;
         }
         
         pch = strtok (NULL, " ");
@@ -52,18 +96,26 @@ void parseExpression(char* string, int size) {
     free(newstring);
 }
 
+/**
+ * convertNumVal
+ */
 int convertNumVal(char *string) {
+    errno = 0;
     char *end;
     long int newLongInt = strtol(string, &end, 10);
     int newInt;
     
+    /* Check for various possible errors */
+    if ((errno == ERANGE && (newLongInt == LONG_MAX || newLongInt == LONG_MIN))
+        || (errno != 0 && newLongInt == 0)) {
+        perror("strtol");
+        return 0;
+    }
+    
     if (newInt <= INT32_MAX && newInt >= INT32_MIN) {
         newInt = (int)newLongInt;
+        return newInt;
     }
     printf("Is Integer %i\n", newInt);
     return 0;
-}
-
-int Add(int a, int b){
-    return a + b;
 }

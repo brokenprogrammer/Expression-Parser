@@ -90,14 +90,10 @@ int main(int argc, const char * argv[]) {
     
     pushOperator(&root, 'b');
     
-    opStack *operationStack = malloc(sizeof(*operationStack));
-    operationStack->opType = binaryOperation;
-    operationStack->BinaryOperation = Add;
     
-    printf("5+5=%i\n", operationStack->BinaryOperation(5,5));
-    free(operationStack);
-    //parseExpression(str, 10);
-    parseExpression("55 + 5 / 3", 10);
+    opStack *operationStack[10] = {0};
+    
+    parseExpression("55 + 5 / 3", 10, operationStack);
     
     return 0;
 }

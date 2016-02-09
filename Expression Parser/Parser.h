@@ -49,9 +49,7 @@ typedef struct opStack {
     
 } opStack;
 
-void parseExpression(char* string, int size);
+void parseExpression(char* string, int size, opStack **OpStack);
 int convertNumVal(char *string);
-
-int Add(int a, int b);
 
 #endif /* Parser_h */
