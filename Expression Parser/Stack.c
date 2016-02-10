@@ -29,27 +29,6 @@
 #include "Stack.h"
 #include "stdlib.h"
 
-union expressionContent {
-    int expressionOperand;
-    char expressionOperator;
-};
-
-typedef struct Stack {
-    union expressionContent data;
-    int size;
-    int isOperator;
-    
-    OpEnum opType;
-    
-    int operand;
-    double constant;
-    
-    int (*UnaryOperation)(int a);
-    int (*BinaryOperation)(int a, int b);
-    
-    struct Stack *next;
-}Stack;
-
 /**
  * initWithData initializes a new Stack by allocating a new pointer with
  * the ammount of memory a Stack needs. Then after checking if the newly
@@ -73,6 +52,8 @@ Stack* initWithOperand(int val) {
     newStack->data.expressionOperand = val;
     newStack->size = 1;
     newStack->isOperator = 0;
+    newStack->opType = operand;
+    newStack->operand = val;
     newStack->next = NULL;
     
     return newStack;
@@ -118,7 +99,7 @@ Stack* initWithOperator(char val) {
  * @param val -  Integer value to place in the Stack structures data property.
  * This integer will act as an operand that can be used in evaluations.
  */
-void pushOperand(Stack **head, int val) {
+void pushOperand(Stack **head, OpEnum opType,  int val) {
     if (!isEmpty(*head) && (*head)->isOperator) {
         printf("Cannot push operator to operand stack.\n");
         return;
@@ -128,6 +109,9 @@ void pushOperand(Stack **head, int val) {
     
     newStack->data.expressionOperand = val;
     newStack->isOperator = 0;
+    
+    newStack->opType = opType;
+    newStack->operand = val;
     
     newStack->next = *head;
     if (!isEmpty(*head)) {
@@ -150,7 +134,7 @@ void pushOperand(Stack **head, int val) {
  * @param val - Char value to place in the Stack structures data property. This
  * char will act as a operator like + - * and /
  */
-void pushOperator(Stack **head, char val) {
+void pushUnaryOp(Stack **head, char val) {
     if (!isEmpty(*head) && !(*head)->isOperator) {
         printf("Cannot push operand to operator stack.\n");
         return;
@@ -159,6 +143,29 @@ void pushOperator(Stack **head, char val) {
     
     newStack->data.expressionOperator = val;
     newStack->isOperator = 1;
+    
+    newStack->next = *head;
+    if (!isEmpty(*head)) {
+        newStack->size = newStack->next->size + 1;
+    } else {
+        newStack->size = 1;
+    }
+    *head = newStack;
+}
+
+void pushBinaryOp(Stack **head, OpEnum opType, int (*BinaryOperation)(int a, int b)) {
+    if (!isEmpty(*head) && (*head)->isOperator) {
+        printf("Cannot push operator to operand stack.\n");
+        return;
+    }
+    
+    Stack *newStack = (Stack *) malloc(sizeof(Stack));
+    
+    newStack->data.expressionOperand = 0;
+    newStack->isOperator = 0;
+    
+    newStack->opType = opType;
+    newStack->BinaryOperation = BinaryOperation;
     
     newStack->next = *head;
     if (!isEmpty(*head)) {
@@ -265,8 +272,10 @@ void display(Stack *head) {
     Stack *current = head;
     
     while (current != NULL) {
-        if (!current->isOperator) {
-            printf("Stack Data: %i, Stack Size: %i\n", current->data.expressionOperand, current->size);
+        if (current->opType == operand) {
+            printf("Stack Data: %i, Stack Size: %i\n", current->operand, current->size);
+        } else if (current->opType == binaryOperation) {
+            printf("Stack BinaryOperationResult: %i, Stack Size: %i\n", current->BinaryOperation(10, 10), current->size);
         }
         current = current->next;
     }

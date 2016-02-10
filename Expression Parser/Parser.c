@@ -53,39 +53,28 @@ void parseExpression(char* string, int size, Stack **OpStack) {
         switch (*pch) {
             case '+':
                 printf("PLUSS\n");
-                
-                /*OpStack[opPos] = malloc(sizeof(opStack));
-                OpStack[opPos]->opType = binaryOperation;
-                OpStack[opPos]->BinaryOperation = Add;*/
+                pushBinaryOp(OpStack, binaryOperation, Add);
                 opPos = opPos + 1;
                 break;
             case '-':
                 printf("Minus\n");
-                /*OpStack[opPos] = malloc(sizeof(opStack));
-                OpStack[opPos]->opType = binaryOperation;
-                OpStack[opPos]->BinaryOperation = Sub;*/
+                pushBinaryOp(OpStack, binaryOperation, Sub);
                 opPos = opPos + 1;
                 break;
             case '/':
                 printf("Divide\n");
-                /*OpStack[opPos] = malloc(sizeof(opStack));
-                OpStack[opPos]->opType = binaryOperation;
-                OpStack[opPos]->BinaryOperation = Divide;*/
+                pushBinaryOp(OpStack, binaryOperation, Divide);
                 opPos = opPos + 1;
                 break;
             case '*':
                 printf("Multiply\n");
-                /*OpStack[opPos] = malloc(sizeof(opStack));
-                OpStack[opPos]->opType = binaryOperation;
-                OpStack[opPos]->BinaryOperation = Multiply;*/
+                pushBinaryOp(OpStack, binaryOperation, Multiply);
                 opPos = opPos + 1;
                 break;
             default:
                 if (isdigit(*pch)) {
-                    /*OpStack[opPos] = malloc(sizeof(opStack));
-                    OpStack[opPos]->opType = operand;
-                    OpStack[opPos]->operand = convertNumVal(pch);*/
-                    //printf("Curr num: %i\n", OpStack[opPos]->operand);
+                    pushOperand(OpStack, operand, convertNumVal(pch));
+                    printf("Pushed value: %i\n", (*OpStack)->operand);
                     opPos = opPos + 1;
                 }
                 break;

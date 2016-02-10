@@ -38,15 +38,33 @@ typedef enum Operations {
     binaryOperation
 }OpEnum;
 
-union expressionContent;
+union expressionContent {
+    int expressionOperand;
+    char expressionOperator;
+};
 
-typedef struct Stack Stack;
+typedef struct Stack {
+    union expressionContent data;
+    int size;
+    int isOperator;
+    
+    OpEnum opType;
+    
+    int operand;
+    double constant;
+    
+    int (*UnaryOperation)(int a);
+    int (*BinaryOperation)(int a, int b);
+    
+    struct Stack *next;
+}Stack;
 
 Stack* initWithOperand(int val);
 Stack* initWithOperator(char val);
 
-void pushOperand(Stack **head, int val);
+void pushOperand(Stack **head, OpEnum opType,  int val);
 void pushOperator(Stack **head, char val);
+void pushBinaryOp(Stack **head, OpEnum opType, int (*BinaryOperation)(int a, int b));
 int pop(Stack **head);
 int peek(Stack **head);
 void deleteStack(Stack **head);

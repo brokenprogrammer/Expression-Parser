@@ -38,9 +38,9 @@ int main(int argc, const char * argv[]) {
     
     Stack *root = initWithOperand(5);
     
-    pushOperand(&root, 5);
-    pushOperand(&root, 10);
-    pushOperand(&root, 15);
+//pushOperand(&root, 5);
+   // pushOperand(&root, 10);
+   // pushOperand(&root, 15);
     
     display(root);
     
@@ -56,7 +56,7 @@ int main(int argc, const char * argv[]) {
         printf("The Stack is empty\n");
     }
     
-    pushOperand(&root, 100);
+    //pushOperand(&root, 100);
     
     if(!isEmpty(root)) {
         printf("The Stack is not empty\n");
@@ -68,9 +68,9 @@ int main(int argc, const char * argv[]) {
     
     printf("Peeking on the top of the stack: %i\n", peek(&root));
     
-    pushOperand(&root, 10);
-    pushOperand(&root, 20);
-    pushOperand(&root, 30);
+   // pushOperand(&root, 10);
+   // pushOperand(&root, 20);
+   // pushOperand(&root, 30);
     
     display(root);
     
@@ -79,21 +79,23 @@ int main(int argc, const char * argv[]) {
     display(root);
     
     for (int x = 0; x < 10000; x++) {
-        pushOperand(&root, x);
+        //pushOperand(&root, x);
     }
    
     deleteStack(&root);
     
-    pushOperand(&root, 55);
-    pushOperand(&root, 155);
+    //pushOperand(&root, 55);
+    //pushOperand(&root, 155);
     display(root);
     
-    pushOperator(&root, 'b');
+    //pushOperator(&root, 'b');
     
     
     Stack *operationStack = initWithOperand(0);
     
     parseExpression("55 + 5 / 3", 10, &operationStack);
     
+    
+    display(operationStack);
     return 0;
 }
