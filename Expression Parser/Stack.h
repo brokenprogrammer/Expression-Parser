@@ -38,13 +38,7 @@ typedef enum Operations {
     binaryOperation
 }OpEnum;
 
-union expressionContent {
-    int expressionOperand;
-    char expressionOperator;
-};
-
 typedef struct Stack {
-    union expressionContent data;
     int size;
     int isOperator;
     
@@ -52,6 +46,7 @@ typedef struct Stack {
     
     int operand;
     double constant;
+    char symbol;
     
     int (*UnaryOperation)(int a);
     int (*BinaryOperation)(int a, int b);

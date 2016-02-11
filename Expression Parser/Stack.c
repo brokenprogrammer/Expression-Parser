@@ -49,9 +49,7 @@ Stack* initWithOperand(int val) {
         return NULL;
     }
     
-    newStack->data.expressionOperand = val;
     newStack->size = 1;
-    newStack->isOperator = 0;
     newStack->opType = operand;
     newStack->operand = val;
     newStack->next = NULL;
@@ -79,9 +77,7 @@ Stack* initWithOperator(char val) {
         return NULL;
     }
     
-    newStack->data.expressionOperator = val;
     newStack->size = 1;
-    newStack->isOperator = 1;
     newStack->next = NULL;
     
     return newStack;
@@ -100,15 +96,12 @@ Stack* initWithOperator(char val) {
  * This integer will act as an operand that can be used in evaluations.
  */
 void pushOperand(Stack **head, OpEnum opType,  int val) {
-    if (!isEmpty(*head) && (*head)->isOperator) {
-        printf("Cannot push operator to operand stack.\n");
+    if (isEmpty(*head)) {
+        
         return;
     }
     
     Stack *newStack = (Stack *) malloc(sizeof(Stack));
-    
-    newStack->data.expressionOperand = val;
-    newStack->isOperator = 0;
     
     newStack->opType = opType;
     newStack->operand = val;
@@ -135,14 +128,10 @@ void pushOperand(Stack **head, OpEnum opType,  int val) {
  * char will act as a operator like + - * and /
  */
 void pushUnaryOp(Stack **head, char val) {
-    if (!isEmpty(*head) && !(*head)->isOperator) {
-        printf("Cannot push operand to operator stack.\n");
+    if (isEmpty(*head)) {
         return;
     }
     Stack *newStack = (Stack *) malloc(sizeof(Stack));
-    
-    newStack->data.expressionOperator = val;
-    newStack->isOperator = 1;
     
     newStack->next = *head;
     if (!isEmpty(*head)) {
@@ -154,15 +143,12 @@ void pushUnaryOp(Stack **head, char val) {
 }
 
 void pushBinaryOp(Stack **head, OpEnum opType, int (*BinaryOperation)(int a, int b)) {
-    if (!isEmpty(*head) && (*head)->isOperator) {
-        printf("Cannot push operator to operand stack.\n");
+    if (isEmpty(*head)) {
+        
         return;
     }
     
     Stack *newStack = (Stack *) malloc(sizeof(Stack));
-    
-    newStack->data.expressionOperand = 0;
-    newStack->isOperator = 0;
     
     newStack->opType = opType;
     newStack->BinaryOperation = BinaryOperation;
@@ -197,11 +183,11 @@ int pop(Stack **head){
     Stack *newStack = (*head)->next;
     int retval;
     
-    if ((*head)->isOperator) {
+    /*if ((*head)->isOperator) {
         retval = (*head)->data.expressionOperator;
     } else {
         retval = (*head)->data.expressionOperand;
-    }
+    }*/
     free(*head);
     *head = newStack;
     
@@ -220,11 +206,11 @@ int pop(Stack **head){
  */
 int peek(Stack **head) {
     if (!isEmpty(*head)) {
-        if (!(*head)->isOperator) {
+        /*if (!(*head)->isOperator) {
             return (*head)->data.expressionOperand;
         } else {
             return (*head)->data.expressionOperator;
-        }
+        }*/
     }
     return -1;
 }

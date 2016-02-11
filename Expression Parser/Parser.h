@@ -32,17 +32,6 @@
 #include <stdio.h>
 #include "Stack.h"
 
-/*typedef struct opStack {
-    OpEnum opType;
-    
-    int operand;
-    double constant;
-    
-    int (*UnaryOperation)(int a);
-    int (*BinaryOperation)(int a, int b);
-    
-} opStack;*/
-
 void parseExpression(char* string, int size, Stack **OpStack);
 int convertNumVal(char *string);
 
