@@ -136,7 +136,7 @@ void pushUnaryOp(Stack **head, char val) {
  * @param val - Char value to place in the Stack structures data property. This
  * char will act as a operator like + - * and /
  */
-void pushBinaryOp(Stack **head, OpEnum opType, int (*BinaryOperation)(int a, int b)) {
+void pushBinaryOp(Stack **head, OpEnum opType, double (*BinaryOperation)(double a, double b)) {
     if (isEmpty(*head)) {
         
         //TODO: MAKE FIX LIKE FOR PUSHOPERAND
@@ -266,9 +266,9 @@ void display(Stack *head) {
     
     while (current != NULL) {
         if (current->opType == operand) {
-            printf("Stack Data: %i, Stack Size: %i\n", current->operand, current->size);
+            printf("Stack Data: %f, Stack Size: %i\n", current->operand, current->size);
         } else if (current->opType == binaryOperation) {
-            printf("Stack BinaryOperationResult: %i, Stack Size: %i\n", current->BinaryOperation(10, 10), current->size);
+            printf("Stack BinaryOperationResult: %f, Stack Size: %i\n", current->BinaryOperation(10, 10), current->size);
         }
         current = current->next;
     }

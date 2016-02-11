@@ -44,12 +44,12 @@ typedef struct Stack {
     
     OpEnum opType;
     
-    int operand;
+    double operand;
     double constant;
     char symbol;
     
-    int (*UnaryOperation)(int a);
-    int (*BinaryOperation)(int a, int b);
+    double (*UnaryOperation)(double a);
+    double (*BinaryOperation)(double a, double b);
     
     struct Stack *next;
 }Stack;
@@ -59,7 +59,7 @@ Stack* initWithOperator(char val);
 
 void pushOperand(Stack **head, OpEnum opType,  int val);
 void pushOperator(Stack **head, char val);
-void pushBinaryOp(Stack **head, OpEnum opType, int (*BinaryOperation)(int a, int b));
+void pushBinaryOp(Stack **head, OpEnum opType, double (*BinaryOperation)(double a, double b));
 int pop(Stack **head);
 int peek(Stack **head);
 void deleteStack(Stack **head);

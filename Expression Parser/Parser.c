@@ -82,7 +82,7 @@ void parseExpression(char* string, int size, Stack **OpStack) {
             default:
                 if (isdigit(*pch)) {
                     pushOperand(OpStack, operand, convertNumVal(pch));
-                    printf("Converted Value: %i, Pushed value: %i\n", convertNumVal(pch), (*OpStack)->operand);
+                    printf("Converted Value: %i, Pushed value: %f\n", convertNumVal(pch), (*OpStack)->operand);
                     opPos = opPos + 1;
                 }
                 break;

@@ -31,6 +31,7 @@
 #include <string.h>
 #include "Stack.h"
 #include "Parser.h"
+#include "Calculator.h"
 
 int main(int argc, const char * argv[]) {
     // insert code here....
@@ -72,10 +73,12 @@ int main(int argc, const char * argv[]) {
     
     display(root);
     
-    Stack *operationStack = NULL;
+    Stack *operationStack = initWithOperand(0);
     
     parseExpression("55 + 5 / 3", 10, &operationStack);
     
     display(operationStack);
+    
+    printf("\n%f\n", calculate(&operationStack, 0));
     return 0;
 }
