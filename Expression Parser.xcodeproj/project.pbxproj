@@ -10,6 +10,7 @@
 		AB21E0AB1C60CEB10037A7DD /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = AB21E0AA1C60CEB10037A7DD /* main.c */; };
 		AB21E0B31C60D42E0037A7DD /* Stack.c in Sources */ = {isa = PBXBuildFile; fileRef = AB21E0B11C60D42E0037A7DD /* Stack.c */; };
 		AB4753E91C66B33C00F165F1 /* Parser.c in Sources */ = {isa = PBXBuildFile; fileRef = AB4753E71C66B33C00F165F1 /* Parser.c */; };
+		AB8552291C6CB37F00DD5390 /* Calculator.c in Sources */ = {isa = PBXBuildFile; fileRef = AB8552271C6CB37F00DD5390 /* Calculator.c */; };
 		AB995F4C1C695EEE00089A2D /* EPMath.c in Sources */ = {isa = PBXBuildFile; fileRef = AB995F4A1C695EEE00089A2D /* EPMath.c */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +33,8 @@
 		AB21E0B21C60D42E0037A7DD /* Stack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stack.h; sourceTree = "<group>"; };
 		AB4753E71C66B33C00F165F1 /* Parser.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Parser.c; sourceTree = "<group>"; };
 		AB4753E81C66B33C00F165F1 /* Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Parser.h; sourceTree = "<group>"; };
+		AB8552271C6CB37F00DD5390 /* Calculator.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Calculator.c; sourceTree = "<group>"; };
+		AB8552281C6CB37F00DD5390 /* Calculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Calculator.h; sourceTree = "<group>"; };
 		AB995F4A1C695EEE00089A2D /* EPMath.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = EPMath.c; sourceTree = "<group>"; };
 		AB995F4B1C695EEE00089A2D /* EPMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPMath.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -73,6 +76,8 @@
 				AB4753E81C66B33C00F165F1 /* Parser.h */,
 				AB995F4A1C695EEE00089A2D /* EPMath.c */,
 				AB995F4B1C695EEE00089A2D /* EPMath.h */,
+				AB8552271C6CB37F00DD5390 /* Calculator.c */,
+				AB8552281C6CB37F00DD5390 /* Calculator.h */,
 			);
 			path = "Expression Parser";
 			sourceTree = "<group>";
@@ -137,6 +142,7 @@
 				AB21E0B31C60D42E0037A7DD /* Stack.c in Sources */,
 				AB21E0AB1C60CEB10037A7DD /* main.c in Sources */,
 				AB4753E91C66B33C00F165F1 /* Parser.c in Sources */,
+				AB8552291C6CB37F00DD5390 /* Calculator.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
