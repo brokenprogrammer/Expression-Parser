@@ -35,9 +35,17 @@
 #include "EPMath.h"
 
 /**
- * parseExpression
+ * parseExpression parses a string of mathematical expressions and puts all the
+ * individual values into a Stack data structure.
+ *
+ * @param string - The string to parse
+ * @param size - The size of the string
+ * @param OpStack - Pointer to the pointer of the stack data structure that
+ * the parsed values should be stored to.
  */
 void parseExpression(char* string, int size, Stack **OpStack) {
+    //Allocates a new string and copies the string from the parameters into
+    //the new allocated string.
     char *newstring = malloc(strlen(string) + 1);
     strcpy(newstring, string);
     
@@ -79,19 +87,23 @@ void parseExpression(char* string, int size, Stack **OpStack) {
                 }
                 break;
         }
-        
         pch = strtok (NULL, " ");
     }
-    
     free(newstring);
 }
 
 /**
- * convertNumVal
+ * convertNumVal converts a string of numbers into an integer value.
+ *
+ * @param string - The string to convert to a number.
+ *
+ * @returns A number that was converted from a string. Returns 0 if 
+ * an error occured.
  */
 int convertNumVal(char *string) {
     errno = 0;
     char *end;
+    
     long int newLongInt = strtol(string, &end, 10);
     int newInt;
     
@@ -101,6 +113,7 @@ int convertNumVal(char *string) {
         perror("strtol");
         return 0;
     }
+    
     
     if (newInt <= INT32_MAX && newInt >= INT32_MIN) {
         newInt = (int)newLongInt;

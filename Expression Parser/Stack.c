@@ -58,32 +58,6 @@ Stack* initWithOperand(int val) {
 }
 
 /**
- * initWithOperator initializes a new Stack by allocating a new pointer with
- * the ammount of memory a Stack needs. Then after checking if the newly
- * created stack is NULL or not its values are initialized by using the value
- * from the parameters and setting the next Stack it points to to NULL.
- * This initial Stack will serve as the bottom of the stack so it will never
- * point to another Stack with its next property.
- * This initializes a stack that only accepts chars.
- *
- * @param val - Value to place in the Stack structures data property.
- *
- * @returns pointer to the just initialized Stack structure(object).
- */
-Stack* initWithOperator(char val) {
-    Stack *newStack = (Stack *) malloc(sizeof(Stack));
-    
-    if(newStack == NULL) {
-        return NULL;
-    }
-    
-    newStack->size = 1;
-    newStack->next = NULL;
-    
-    return newStack;
-}
-
-/**
  * pushOperand is pushing a new int value to the top of the stack. 
  * Since the Stack structure is a LIFO(Last In First Out) the value pushed
  * is stored into a new Stack structure and the old head Stack (Top) is getting 
@@ -97,6 +71,8 @@ Stack* initWithOperator(char val) {
  */
 void pushOperand(Stack **head, OpEnum opType,  int val) {
     if (isEmpty(*head)) {
+        
+        (*head) = initWithOperand(val);
         
         return;
     }
@@ -116,10 +92,12 @@ void pushOperand(Stack **head, OpEnum opType,  int val) {
 }
 
 /**
- * pushOperator is pushing a new char value to the top of the stack. 
- * Since the Stack structure is a LIFO(Last In First Out) the value pushed 
+ * pushUnaryOp pushes a new function pointer to the top of the stack. The
+ * function will act as an math operation that needs one value like sqare root
+ * of 32.
+ * Since the Stack structure is a LIFO(Last In First Out) the value pushed
  * is stored into a new Stack structure and the old head Stack (Top) is getting
- * replace with the new Stack created. 
+ * replace with the new Stack created.
  * That makes it so that the new Stack is the new top pointing to the old top.
  *
  * @param **head - Pointer to the pointer of head, we use pointer to pointers to
@@ -129,6 +107,9 @@ void pushOperand(Stack **head, OpEnum opType,  int val) {
  */
 void pushUnaryOp(Stack **head, char val) {
     if (isEmpty(*head)) {
+        
+        //TODO: MAKE FIX LIKE FOR PUSHOPERAND
+        
         return;
     }
     Stack *newStack = (Stack *) malloc(sizeof(Stack));
@@ -142,8 +123,23 @@ void pushUnaryOp(Stack **head, char val) {
     *head = newStack;
 }
 
+/**
+ * pushBinaryOp pushes a new function pointer to the top of the stack. The 
+ * function will act as an math operation that needs two values like 1 + 2
+ * Since the Stack structure is a LIFO(Last In First Out) the value pushed
+ * is stored into a new Stack structure and the old head Stack (Top) is getting
+ * replace with the new Stack created.
+ * That makes it so that the new Stack is the new top pointing to the old top.
+ *
+ * @param **head - Pointer to the pointer of head, we use pointer to pointers to
+ * make it easier by letting us change the entire head Stack from this function.
+ * @param val - Char value to place in the Stack structures data property. This
+ * char will act as a operator like + - * and /
+ */
 void pushBinaryOp(Stack **head, OpEnum opType, int (*BinaryOperation)(int a, int b)) {
     if (isEmpty(*head)) {
+        
+        //TODO: MAKE FIX LIKE FOR PUSHOPERAND
         
         return;
     }
@@ -173,7 +169,8 @@ void pushBinaryOp(Stack **head, OpEnum opType, int (*BinaryOperation)(int a, int
  * @param val - Value to place in the Stack structures data property.
  *
  * @returns The data value from the removed Stack. Returns -1 if the Stack is
- * empty.
+ * empty. Returns an integer number if the top of the stack is an
+ * operand. Returns char symbol of the top of the stack is not an operand.
  */
 int pop(Stack **head){
     if (isEmpty(*head)) {
@@ -183,11 +180,20 @@ int pop(Stack **head){
     Stack *newStack = (*head)->next;
     int retval;
     
-    /*if ((*head)->isOperator) {
-        retval = (*head)->data.expressionOperator;
-    } else {
-        retval = (*head)->data.expressionOperand;
-    }*/
+    switch ((*head)->opType) {
+        case operand:
+            retval = (*head)->operand;
+            break;
+        case constant:
+            retval = (*head)->symbol;
+            break;
+        case unaryOperation:
+            retval = (*head)->symbol;
+            break;
+        case binaryOperation:
+            retval = (*head)->symbol;
+            break;
+    }
     free(*head);
     *head = newStack;
     
@@ -202,15 +208,16 @@ int pop(Stack **head){
  * make it easier by letting us change the entire head Stack from this function.
  *
  * @returns The data value found on the top of the Stack. Returns -1 if the
- * Stack is empty.
+ * Stack is empty. Returns an integer number if the top of the stack is an 
+ * operand. Returns char symbol of the top of the stack is not an operand.
  */
 int peek(Stack **head) {
     if (!isEmpty(*head)) {
-        /*if (!(*head)->isOperator) {
-            return (*head)->data.expressionOperand;
+        if ((*head)->opType == operand) {
+            return (*head)->operand;
         } else {
-            return (*head)->data.expressionOperator;
-        }*/
+            return (*head)->symbol;
+        }
     }
     return -1;
 }
