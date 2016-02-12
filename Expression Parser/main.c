@@ -79,6 +79,21 @@ int main(int argc, const char * argv[]) {
     
     display(operationStack);
     
-    printf("\n%f\n", calculate(&operationStack, 0));
+    Stack *operandStack = initWithOperand(0);
+    Stack *current = operationStack;
+    
+    while (current != NULL) {
+        if (current->opType == operand) {
+            //printf("Stack Data: %f, Stack Size: %i\n", current->operand, current->size);
+            if(current->operand != 0) {
+                pushOperand(&operandStack, operand, (int)current->operand);
+            }
+        } else if (current->opType == binaryOperation) {
+            //printf("Stack BinaryOperationResult: %f, Stack Size: %i\n", current->BinaryOperation(10, 10), current->size);
+        }
+        current = current->next;
+    }
+    
+    printf("\n%f\n", calculate(&operationStack, &operandStack, 0, ""));
     return 0;
 }
