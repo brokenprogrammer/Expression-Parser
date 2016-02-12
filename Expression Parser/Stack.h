@@ -31,6 +31,11 @@
 
 #include <stdio.h>
 
+/*
+ * Operations Enum
+ * Every linked stack will contain an Operation enumeration to tell what
+ * each stack contains.
+ */
 typedef enum Operations {
     operand,
     constant,
@@ -38,6 +43,13 @@ typedef enum Operations {
     binaryOperation
 }OpEnum;
 
+/*
+ * Stack Structure
+ * This is a stack data structure that is made specifically for this
+ * Expression Parser. It contains an Operation Enum to tell if there is for 
+ * example an operand or an operation contained in the Stack. If it contains
+ * an operation it also contains a function pointer to that operation.
+ */
 typedef struct Stack {
     int size;
     int isOperator;
@@ -54,17 +66,99 @@ typedef struct Stack {
     struct Stack *next;
 }Stack;
 
+/*
+ * initWithOperand
+ * Initializes a new Stack by allocating a new pointer with
+ * the ammount of memory a Stack needs.
+ *
+ * @param val - Value to place in the Stack structures data property.
+ *
+ * @returns pointer to the just initialized Stack structure(object).
+ */
 Stack* initWithOperand(int val);
-Stack* initWithOperator(char val);
 
+/*
+ * pushOperand
+ * Pushes a new int value to the top of the stack. 
+ *
+ * @param **head - Pointer to the pointer of head, we use pointer to pointers to
+ * make it easier by letting us change the entire head Stack from this function.
+ * @param val -  Integer value to place in the Stack structures data property.
+ * This integer will act as an operand that can be used in evaluations.
+ */
 void pushOperand(Stack **head, OpEnum opType,  int val);
-void pushOperator(Stack **head, char val);
+
+/*
+ * pushUnaryOp
+ */
+void pushUnaryOp(Stack **head, char val);
+
+/*
+ * pushBinaryOp
+ * Pushes a new function pointer to a Binary Operation to the top of the stack.
+ *
+ * @param **head - Pointer to the pointer of head, we use pointer to pointers to
+ * make it easier by letting us change the entire head Stack from this function.
+ * @param val - Char value to place in the Stack structures data property. This
+ * char will act as a operator like + - * and /
+ */
 void pushBinaryOp(Stack **head, OpEnum opType, double (*BinaryOperation)(double a, double b));
+
+/*
+ * pop
+ * Removes the first element of the Stack. And returns the value.
+ *
+ * @param **head - Pointer to the pointer of head, we use pointer to pointers to
+ * make it easier by letting us change the entire head Stack from this function.
+ * @param val - Value to place in the Stack structures data property.
+ *
+ * @returns The data value from the removed Stack. Returns -1 if the Stack is
+ * empty. Returns an integer number if the top of the stack is an
+ * operand. Returns char symbol of the top of the stack is not an operand.
+ */
 int pop(Stack **head);
+
+/*
+ * peek
+ * Lets the caller view the value of the element at the
+ * top of the stack without removing it.
+ *
+ * @param **head - Pointer to the pointer of head, we use pointer to pointers to
+ * make it easier by letting us change the entire head Stack from this function.
+ *
+ * @returns The data value found on the top of the Stack. Returns -1 if the
+ * Stack is empty. Returns an integer number if the top of the stack is an
+ * operand. Returns char symbol of the top of the stack is not an operand.
+ */
 int peek(Stack **head);
+
+/*
+ * deleteStack
+ * Lets the caller delete their entire Stack
+ * structure by calling this function.
+ *
+ * @param **head - Pointer to the pointer of head, we use pointer to pointers to
+ * make it easier by letting us change the entire head Stack from this function.
+ */
 void deleteStack(Stack **head);
 
+/*
+ * isEmpty
+ * Checks if the Stack passed into the parameters is empty.
+ *
+ * @param *head - The Stack to check if empty or not.
+ *
+ * @returns 1 if the Stack is empty. Returns 0 if the Stack is not empty.
+ */
 int isEmpty(Stack *head);
+
+/*
+ * display
+ * Loops through the entire Stacks linked list priting out every
+ * data property found while looping through the entire list of linked Stacks.
+ *
+ * @param *head - The target Stack to loop through its linked elements.
+ */
 void display(Stack *head);
 
 #endif /* Stack_h */
