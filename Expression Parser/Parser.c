@@ -43,7 +43,7 @@
  * @param OpStack - Pointer to the pointer of the stack data structure that
  * the parsed values should be stored to.
  */
-void parseExpression(char* string, int size, Stack **OpStack) {
+void parseExpression(char* string, int size, Stack **OpStack, Stack **OperandStack) {
     //Allocates a new string and copies the string from the parameters into
     //the new allocated string.
     char *newstring = malloc(strlen(string) + 1);
@@ -81,8 +81,8 @@ void parseExpression(char* string, int size, Stack **OpStack) {
                 break;
             default:
                 if (isdigit(*pch)) {
-                    pushOperand(OpStack, operand, convertNumVal(pch));
-                    printf("Converted Value: %i, Pushed value: %f\n", convertNumVal(pch), (*OpStack)->operand);
+                    pushOperand(OperandStack, operand, convertNumVal(pch));
+                    printf("Converted Value: %i, Pushed value: %f\n", convertNumVal(pch), (*OperandStack)->operand);
                     opPos = opPos + 1;
                 }
                 break;

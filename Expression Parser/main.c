@@ -74,26 +74,13 @@ int main(int argc, const char * argv[]) {
     display(root);
     
     Stack *operationStack = initWithOperand(0);
+    Stack *operandStack = initWithOperand(0);
     
-    parseExpression("55 + 5 / 3", 10, &operationStack);
+    parseExpression("55 + 5 / 3", 10, &operationStack, &operandStack);
     
     display(operationStack);
+    display(operandStack);
     
-    Stack *operandStack = initWithOperand(0);
-    Stack *current = operationStack;
-    
-    while (current != NULL) {
-        if (current->opType == operand) {
-            //printf("Stack Data: %f, Stack Size: %i\n", current->operand, current->size);
-            if(current->operand != 0) {
-                pushOperand(&operandStack, operand, (int)current->operand);
-            }
-        } else if (current->opType == binaryOperation) {
-            //printf("Stack BinaryOperationResult: %f, Stack Size: %i\n", current->BinaryOperation(10, 10), current->size);
-        }
-        current = current->next;
-    }
-    
-    printf("\n%f\n", calculate(&operationStack, &operandStack, 0, ""));
+    printf("\n%f\n", calculate(&operationStack, &operandStack));
     return 0;
 }

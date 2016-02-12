@@ -28,58 +28,22 @@
 
 #include "Calculator.h"
 
-double calculate(Stack **OpStack, Stack **OperandStack, double result, char* string) {
-    double result2;
-    /*if (!isEmpty(*OpStack)) {
-        switch ((*OpStack)->opType) {
-            case operand:
-                if ((*OpStack)->operand != 0) {
-                    //PUSHING OPERAND INTO THE OPERANDSTACK
-                    if (isEmpty(*OperandStack)) {
-                        *OperandStack = initWithOperand((*OpStack)->operand);
-                    } else {
-                        pushOperand(OperandStack, operand, (*OpStack)->operand);
-                    }
-                    calculate(&(*OpStack)->next, &(*OperandStack), result, "");
-                }
-                break;
-            case constant:
-                calculate(&(*OpStack)->next, &(*OperandStack), ((*OpStack)->operand), "");
-                break;
-            case unaryOperation:
-                calculate(&(*OpStack)->next, &(*OperandStack), ((*OpStack)->UnaryOperation(result)), "");
-                break;
+double calculate(Stack **OpStack, Stack **OperandStack) {
+    double result = 0;
+    
+    Stack *current = *OpStack;
+    for (; current; current = current->next) {
+        switch (current->opType) {
             case binaryOperation:
-                display(*OperandStack);
-                calculate(&(*OpStack)->next, &(*OperandStack), (*OpStack)->BinaryOperation(pop(OperandStack), pop(OperandStack)), "");
+                result += current->BinaryOperation(pop(OperandStack), pop(OperandStack));
+                printf("Current result: %f\n", result);
+                break;
+                
+            default:
+                printf("Something else than an operation was found here..\n");
                 break;
         }
-    }*/
-    
-   /* while (current != NULL) {
-        if (current->opType == operand) {
-            if (isEmpty(*OperandStack)) {
-                *OperandStack = initWithOperand((*OpStack)->operand);
-            } else {
-                pushOperand(OperandStack, operand, (*OpStack)->operand);
-            }
-        }
-        current = current->next;
-    }*/
-    printf("OperandStack POPULATED\n");
-    display(*OperandStack);
-    
-    Stack *current2 = *OpStack;
-    while (current2 != NULL) {
-        if (current2->opType == binaryOperation) {
-            int val1 = pop(&(*OperandStack));
-            int val2 = pop(&(*OperandStack));
-            printf("Preforming operation between %i and %i\n", val1, val2);
-            result2 += current2->BinaryOperation(val1, val2);
-        }
-        current2 = current2->next;
     }
     
-    
-    return result2;
+    return result;
 }

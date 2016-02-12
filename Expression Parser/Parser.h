@@ -41,7 +41,7 @@
  * @param OpStack - Pointer to the pointer of the stack data structure that
  * the parsed values should be stored to.
  */
-void parseExpression(char* string, int size, Stack **OpStack);
+void parseExpression(char* string, int size, Stack **OpStack, Stack **OperandStack);
 
 /**
  * convertNumVal converts a string of numbers into an integer value.

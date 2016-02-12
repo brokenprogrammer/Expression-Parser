@@ -32,6 +32,6 @@
 #include <stdio.h>
 #include "Stack.h"
 
-double calculate(Stack **OpStack, Stack **OperandStack, double result, char* string);
+double calculate(Stack **OpStack, Stack **OperandStack);
 
 #endif /* Calculator_h */
