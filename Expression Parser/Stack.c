@@ -92,20 +92,19 @@ void pushOperand(Stack **head, OpEnum opType,  int val) {
 }
 
 /**
- * pushUnaryOp pushes a new function pointer to the top of the stack. The
- * function will act as an math operation that needs one value like sqare root
- * of 32.
- * Since the Stack structure is a LIFO(Last In First Out) the value pushed
- * is stored into a new Stack structure and the old head Stack (Top) is getting
- * replace with the new Stack created.
- * That makes it so that the new Stack is the new top pointing to the old top.
+ * pushUnaryOp 
+ * Pushes a new function pointer to a Unary Operation to the top of the stack.
  *
  * @param **head - Pointer to the pointer of head, we use pointer to pointers to
  * make it easier by letting us change the entire head Stack from this function.
- * @param val - Char value to place in the Stack structures data property. This
- * char will act as a operator like + - * and /
+ * @param opType - The opType value which will later when looping through the
+ * linked list be used with a switch statement to check what each value is
+ * in the Stack.
+ * @param (*BinaryOperation) - A pointer to a function, this will be a pointer
+ * to a binary operation function.
+ * @param symbol - Char value to place in the Stack structures data property.
  */
-void pushUnaryOp(Stack **head, char val) {
+void pushUnaryOp(Stack **head, OpEnum opType, double (*UnaryOperation)(double a), char symbol) {
     if (isEmpty(*head)) {
         
         //TODO: MAKE FIX LIKE FOR PUSHOPERAND
@@ -113,6 +112,10 @@ void pushUnaryOp(Stack **head, char val) {
         return;
     }
     Stack *newStack = (Stack *) malloc(sizeof(Stack));
+    
+    newStack->opType = opType;
+    newStack->UnaryOperation = UnaryOperation;
+    newStack->symbol = symbol;
     
     newStack->next = *head;
     if (!isEmpty(*head)) {

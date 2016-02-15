@@ -61,6 +61,9 @@ void parseExpression(char* string, int size, Stack **OpStack, Stack **OperandSta
         switch (*pch) {
             case '+':
                 printf("PLUSS\n");
+                if (strlen(pch) > 1) {
+                    parseNested(pch, strlen(pch), OpStack, OperandStack);
+                }
                 pushBinaryOp(OpStack, binaryOperation, Add, '+');
                 opPos = opPos + 1;
                 break;
@@ -106,7 +109,7 @@ int convertNumVal(char *string) {
     errno = 0;
     char *end;
     
-    long int newLongInt = strtol(string, &end, 10);
+    long int newLongInt = strtol(string, &end, 0);
     int newInt;
     
     /* Check for various possible errors */
@@ -123,4 +126,47 @@ int convertNumVal(char *string) {
     }
     printf("Is Integer %i\n", newInt);
     return 0;
+}
+
+void parseNested(char string[], unsigned long size, Stack **OpStack, Stack **OperandStack) {
+    char *newNum = malloc(strlen(string) + 1);
+    int lastWasNum = 0;
+    
+    for (int x = 0; x < size; x++) {
+        switch (string[x]) {
+            case '+':
+                printf("PLUSS\n");
+                if (lastWasNum) {
+                    printf("PUSHING NUM: %i\n", convertNumVal(newNum));
+                    pushOperand(OperandStack, operand, convertNumVal(newNum));
+                    lastWasNum = 0;
+                    newNum = "";
+                }
+                pushBinaryOp(OpStack, binaryOperation, Add, '+');
+                break;
+            case '-':
+                printf("MINUS\n");
+                if (lastWasNum) {
+                    printf("PUSHING NUM: %i\n", convertNumVal(newNum));
+                    pushOperand(OperandStack, operand, convertNumVal(newNum));
+                    lastWasNum = 0;
+                    newNum = "";
+                }
+                pushBinaryOp(OpStack, binaryOperation, Sub, '-');
+                break;
+            default:
+                if (isdigit(string[x])) {
+                    lastWasNum = 1;
+                    strcat(newNum, &string[x]);
+                    //newNum += string[x];
+                }
+                break;
+        }
+    }
+    
+    if (lastWasNum) {
+        pushOperand(OperandStack, operand, convertNumVal(newNum));
+        lastWasNum = 0;
+        newNum = "";
+    }
 }

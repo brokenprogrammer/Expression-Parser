@@ -90,8 +90,18 @@ void pushOperand(Stack **head, OpEnum opType,  int val);
 
 /*
  * pushUnaryOp
+ * Pushes a new function pointer to a Unary Operation to the top of the stack.
+ *
+ * @param **head - Pointer to the pointer of head, we use pointer to pointers to
+ * make it easier by letting us change the entire head Stack from this function.
+ * @param opType - The opType value which will later when looping through the
+ * linked list be used with a switch statement to check what each value is
+ * in the Stack.
+ * @param (*BinaryOperation) - A pointer to a function, this will be a pointer
+ * to a binary operation function.
+ * @param symbol - Char value to place in the Stack structures data property.
  */
-void pushUnaryOp(Stack **head, char val);
+void pushUnaryOp(Stack **head, OpEnum opType, double (*UnaryOperation)(double a), char symbol);
 
 /*
  * pushBinaryOp

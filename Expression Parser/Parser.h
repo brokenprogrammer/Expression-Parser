@@ -43,6 +43,8 @@
  */
 void parseExpression(char* string, int size, Stack **OpStack, Stack **OperandStack);
 
+void parseNested(char string[], unsigned long size, Stack **OpStack, Stack **OperandStack);
+
 /**
  * convertNumVal converts a string of numbers into an integer value.
  *
