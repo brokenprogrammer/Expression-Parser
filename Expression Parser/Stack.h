@@ -99,10 +99,15 @@ void pushUnaryOp(Stack **head, char val);
  *
  * @param **head - Pointer to the pointer of head, we use pointer to pointers to
  * make it easier by letting us change the entire head Stack from this function.
- * @param val - Char value to place in the Stack structures data property. This
+ * @param opType - The opType value which will later when looping through the
+ * linked list be used with a switch statement to check what each value is 
+ * in the Stack.
+ * @param (*BinaryOperation) - A pointer to a function, this will be a pointer
+ * to a binary operation function.
+ * @param symbol - Char value to place in the Stack structures data property. This
  * char will act as a operator like + - * and /
  */
-void pushBinaryOp(Stack **head, OpEnum opType, double (*BinaryOperation)(double a, double b));
+void pushBinaryOp(Stack **head, OpEnum opType, double (*BinaryOperation)(double a, double b), char symbol);
 
 /*
  * pop

@@ -61,22 +61,22 @@ void parseExpression(char* string, int size, Stack **OpStack, Stack **OperandSta
         switch (*pch) {
             case '+':
                 printf("PLUSS\n");
-                pushBinaryOp(OpStack, binaryOperation, Add);
+                pushBinaryOp(OpStack, binaryOperation, Add, '+');
                 opPos = opPos + 1;
                 break;
             case '-':
                 printf("Minus\n");
-                pushBinaryOp(OpStack, binaryOperation, Sub);
+                pushBinaryOp(OpStack, binaryOperation, Sub, '-');
                 opPos = opPos + 1;
                 break;
             case '/':
                 printf("Divide\n");
-                pushBinaryOp(OpStack, binaryOperation, Divide);
+                pushBinaryOp(OpStack, binaryOperation, Divide, '/');
                 opPos = opPos + 1;
                 break;
             case '*':
                 printf("Multiply\n");
-                pushBinaryOp(OpStack, binaryOperation, Multiply);
+                pushBinaryOp(OpStack, binaryOperation, Multiply, '*');
                 opPos = opPos + 1;
                 break;
             default:
