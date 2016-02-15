@@ -35,8 +35,9 @@ double calculate(Stack **OpStack, Stack **OperandStack) {
     for (; current; current = current->next) {
         switch (current->opType) {
             case binaryOperation:
-                result += current->BinaryOperation(pop(OperandStack), pop(OperandStack));
+                result = current->BinaryOperation(pop(OperandStack), pop(OperandStack));
                 printf("Current result: %f\n", result);
+                pushOperand(OperandStack, operand, result);
                 break;
                 
             default:

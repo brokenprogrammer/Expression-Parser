@@ -76,7 +76,7 @@ int main(int argc, const char * argv[]) {
     Stack *operationStack = initWithOperand(0);
     Stack *operandStack = initWithOperand(0);
     
-    parseExpression("55 + 5 / 3", 10, &operationStack, &operandStack);
+    parseExpression("3 - 3 * 6 + 2", 10, &operationStack, &operandStack);
     
     display(operationStack);
     display(operandStack);

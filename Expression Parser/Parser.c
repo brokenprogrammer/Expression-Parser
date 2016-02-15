@@ -84,6 +84,8 @@ void parseExpression(char* string, int size, Stack **OpStack, Stack **OperandSta
                     pushOperand(OperandStack, operand, convertNumVal(pch));
                     printf("Converted Value: %i, Pushed value: %f\n", convertNumVal(pch), (*OperandStack)->operand);
                     opPos = opPos + 1;
+                } else {
+                    printf("Dropped unknown value: %s", pch);
                 }
                 break;
         }

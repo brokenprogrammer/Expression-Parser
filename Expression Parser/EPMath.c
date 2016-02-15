@@ -37,6 +37,9 @@ double Sub(double a, double b) {
 }
 
 double Divide(double a, double b) {
+    if (a == b || a == 0 || b || 0) {
+        return 1;
+    }
     return b / a;
 }
 
