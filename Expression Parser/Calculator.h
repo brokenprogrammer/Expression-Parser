@@ -32,6 +32,14 @@
 #include <stdio.h>
 #include "Stack.h"
 
+/*
+ * calculate
+ * Calculates an parsed expression using one stack for the operations and
+ * one stack for the operands.
+ *
+ * @param **OpStack      - The stack of operations.
+ * @param **OperandStack - The stack of operands.
+ */
 double calculate(Stack **OpStack, Stack **OperandStack);
 
 #endif /* Calculator_h */

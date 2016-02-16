@@ -31,9 +31,40 @@
 
 #include <stdio.h>
 
+/*
+ * Add
+ * Adds two values and returns their sum.
+ *
+ * @param a - Value 1.
+ * @param b - Value 2.
+ */
 double Add(double a, double b);
+
+/*
+ * Sub
+ * Subtracts two values and returns their difference.
+ *
+ * @param a - Value 1.
+ * @param b - Value 2.
+ */
 double Sub(double a, double b);
+
+/*
+ * Divide
+ * Divides two values and returns their quotient.
+ *
+ * @param a - Value 1.
+ * @param b - Value 2.
+ */
 double Divide(double a, double b);
+
+/*
+ * Multiply
+ * Multiplies two values and returns their product.
+ *
+ * @param a - Value 1.
+ * @param b - Value 2.
+ */
 double Multiply(double a, double b);
 
 #endif /* EPMath_h */

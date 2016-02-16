@@ -28,14 +28,35 @@
 
 #include "EPMath.h"
 
+/*
+ * Add
+ * Adds two values and returns their sum.
+ *
+ * @param a - Value 1.
+ * @param b - Value 2.
+ */
 double Add(double a, double b){
     return a + b;
 }
 
+/*
+ * Sub
+ * Subtracts two values and returns their difference.
+ *
+ * @param a - Value 1.
+ * @param b - Value 2.
+ */
 double Sub(double a, double b) {
     return a - b;
 }
 
+/*
+ * Divide
+ * Divides two values and returns their quotient.
+ *
+ * @param a - Value 1.
+ * @param b - Value 2.
+ */
 double Divide(double a, double b) {
     if (a == b || a == 0 || b || 0) {
         return 1;
@@ -43,6 +64,13 @@ double Divide(double a, double b) {
     return b / a;
 }
 
+/*
+ * Multiply
+ * Multiplies two values and returns their product.
+ *
+ * @param a - Value 1.
+ * @param b - Value 2.
+ */
 double Multiply(double a, double b) {
     return a * b;
 }

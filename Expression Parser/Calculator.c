@@ -28,6 +28,14 @@
 
 #include "Calculator.h"
 
+/*
+ * calculate
+ * Calculates an parsed expression using one stack for the operations and
+ * one stack for the operands.
+ *
+ * @param **OpStack      - The stack of operations.
+ * @param **OperandStack - The stack of operands.
+ */
 double calculate(Stack **OpStack, Stack **OperandStack) {
     double result = 0;
     
@@ -35,8 +43,10 @@ double calculate(Stack **OpStack, Stack **OperandStack) {
     for (; current; current = current->next) {
         switch (current->opType) {
             case binaryOperation:
+                //Result is always the result of the lastest made operation
                 result = current->BinaryOperation(pop(OperandStack), pop(OperandStack));
                 printf("Current result: %f\n", result);
+                //Pushes the latest result to the operand stack incase it should be used again.
                 pushOperand(OperandStack, operand, result);
                 break;
                 
