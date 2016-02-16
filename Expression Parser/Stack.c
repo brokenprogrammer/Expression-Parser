@@ -84,7 +84,7 @@ void pushOperand(Stack **head, OpEnum opType,  int val) {
     
     newStack->next = *head;
     if (!isEmpty(*head)) {
-        //newStack->size = newStack->next->size + 1;
+        newStack->size = newStack->next->size + 1;
     } else {
         newStack->size = 1;
     }

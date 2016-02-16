@@ -34,6 +34,38 @@
 #include <ctype.h>
 #include "EPMath.h"
 
+void doIt(char string[], int size, Stack **OpStack,Stack **OperandStack){
+    char newstring[size];
+    strcpy(newstring, string);
+    
+    printf("String working with: %s\n", newstring);
+    
+    char *p = newstring;
+    
+    while (*p) { // While there are more characters to process...
+        switch (*p) {
+            case '+':
+                printf("PLUSS\n");
+                pushBinaryOp(OpStack, binaryOperation, Add, '+');
+                break;
+            case '-':
+                printf("MINUS\n");
+                pushBinaryOp(OpStack, binaryOperation, Sub, '-');
+                break;
+                
+            default:
+                break;
+        }
+        if (isdigit(*p)) { // Upon finding a digit, ...
+            long val = strtol(p, &p, 10); // Read a number, ...
+            printf("%ld\n", val); // and print it.
+            pushOperand(OperandStack, operand, (int)val);
+        } else { // Otherwise, move on to the next character.
+            p++;
+        }
+    }
+}
+
 /**
  * parseExpression parses a string of mathematical expressions and puts all the
  * individual values into a Stack data structure.
@@ -62,9 +94,11 @@ void parseExpression(char* string, int size, Stack **OpStack, Stack **OperandSta
             case '+':
                 printf("PLUSS\n");
                 if (strlen(pch) > 1) {
-                    parseNested(pch, strlen(pch), OpStack, OperandStack);
+                    //parseNested(pch, strlen(pch), OpStack, OperandStack);
+                    doIt(pch, 6, OpStack, OperandStack);
+                } else {
+                    pushBinaryOp(OpStack, binaryOperation, Add, '+');
                 }
-                pushBinaryOp(OpStack, binaryOperation, Add, '+');
                 opPos = opPos + 1;
                 break;
             case '-':

@@ -78,7 +78,7 @@ int main(int argc, const char * argv[]) {
     
     parseExpression("15 +15-20", 10, &operationStack, &operandStack);
     
-    //display(operationStack);
+    display(operationStack);
     display(operandStack);
     
     printf("\n%f\n", calculate(&operationStack, &operandStack));
