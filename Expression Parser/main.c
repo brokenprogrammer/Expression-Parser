@@ -76,7 +76,7 @@ int main(int argc, const char * argv[]) {
     Stack *operationStack = initWithOperand(0);
     Stack *operandStack = initWithOperand(0);
     
-    parseExpression("15 +15-20", 10, &operationStack, &operandStack);
+    parseExpression("15 +15-20 + 20", 10, &operationStack, &operandStack);
     
     display(operationStack);
     display(operandStack);

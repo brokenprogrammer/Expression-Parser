@@ -43,7 +43,17 @@
  */
 void parseExpression(char* string, int size, Stack **OpStack, Stack **OperandStack);
 
-void parseNested(char string[], unsigned long size, Stack **OpStack, Stack **OperandStack);
+/**
+ * doIt parses a string of mathematical expressions and puts all the
+ * individual values into a Stack data structure. This function parses nested
+ * expressions that is not separated with a space for example "+15-20".
+ *
+ * @param string - The string to parse
+ * @param size - The size of the string
+ * @param OpStack - Pointer to the pointer of the stack data structure that
+ * the parsed values should be stored to.
+ */
+void doIt(char string[], unsigned long size, Stack **OpStack,Stack **OperandStack);
 
 /**
  * convertNumVal converts a string of numbers into an integer value.

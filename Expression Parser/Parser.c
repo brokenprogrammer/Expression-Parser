@@ -34,7 +34,17 @@
 #include <ctype.h>
 #include "EPMath.h"
 
-void doIt(char string[], int size, Stack **OpStack,Stack **OperandStack){
+/**
+ * doIt parses a string of mathematical expressions and puts all the
+ * individual values into a Stack data structure. This function parses nested
+ * expressions that is not separated with a space for example "+15-20".
+ *
+ * @param string - The string to parse
+ * @param size - The size of the string
+ * @param OpStack - Pointer to the pointer of the stack data structure that
+ * the parsed values should be stored to.
+ */
+void doIt(char string[], unsigned long size, Stack **OpStack, Stack **OperandStack) {
     char newstring[size];
     strcpy(newstring, string);
     
@@ -94,8 +104,7 @@ void parseExpression(char* string, int size, Stack **OpStack, Stack **OperandSta
             case '+':
                 printf("PLUSS\n");
                 if (strlen(pch) > 1) {
-                    //parseNested(pch, strlen(pch), OpStack, OperandStack);
-                    doIt(pch, 6, OpStack, OperandStack);
+                    doIt(pch, strlen(pch), OpStack, OperandStack);
                 } else {
                     pushBinaryOp(OpStack, binaryOperation, Add, '+');
                 }
@@ -103,17 +112,29 @@ void parseExpression(char* string, int size, Stack **OpStack, Stack **OperandSta
                 break;
             case '-':
                 printf("Minus\n");
-                pushBinaryOp(OpStack, binaryOperation, Sub, '-');
+                if (strlen(pch) > 1) {
+                    doIt(pch, strlen(pch), OpStack, OperandStack);
+                } else {
+                    pushBinaryOp(OpStack, binaryOperation, Sub, '-');
+                }
                 opPos = opPos + 1;
                 break;
             case '/':
                 printf("Divide\n");
-                pushBinaryOp(OpStack, binaryOperation, Divide, '/');
+                if (strlen(pch) > 1) {
+                    doIt(pch, strlen(pch), OpStack, OperandStack);
+                } else {
+                    pushBinaryOp(OpStack, binaryOperation, Divide, '/');
+                }
                 opPos = opPos + 1;
                 break;
             case '*':
                 printf("Multiply\n");
-                pushBinaryOp(OpStack, binaryOperation, Multiply, '*');
+                if (strlen(pch) > 1) {
+                    doIt(pch, strlen(pch), OpStack, OperandStack);
+                } else {
+                    pushBinaryOp(OpStack, binaryOperation, Multiply, '*');
+                }
                 opPos = opPos + 1;
                 break;
             default:
@@ -160,52 +181,4 @@ int convertNumVal(char *string) {
     }
     printf("Is Integer %i\n", newInt);
     return 0;
-}
-
-void parseNested(char string[], unsigned long size, Stack **OpStack, Stack **OperandStack) {
-    char newNum[] = "";
-    int lastWasNum = 0;
-    
-    for (int x = 0; x < size; x++) {
-        switch (string[x]) {
-            case '+':
-                printf("PLUSS\n");
-                if (lastWasNum) {
-                    printf("PUSHING NUM: %i\n", convertNumVal(newNum));
-                    pushOperand(OperandStack, operand, convertNumVal(newNum));
-                    lastWasNum = 0;
-                    strcpy(newNum, "");
-                }
-                pushBinaryOp(OpStack, binaryOperation, Add, '+');
-                break;
-            case '-':
-                printf("MINUS\n");
-                if (lastWasNum) {
-                    printf("PUSHING NUM: %i\n", convertNumVal(newNum));
-                    pushOperand(OperandStack, operand, convertNumVal(newNum));
-                    lastWasNum = 0;
-                    strcpy(newNum, "");
-                }
-                pushBinaryOp(OpStack, binaryOperation, Sub, '-');
-                break;
-            default:
-                if (isdigit(string[x])) {
-                    lastWasNum = 1;
-                    unsigned long len = strlen(newNum);
-                    newNum[len] = string[x];
-                    printf("%c\n", newNum[len]);
-                    newNum[len+1] = '\0';
-                }
-                break;
-        }
-    }
-    
-    if (lastWasNum) {
-        printf("PUSHING NUM: %i\n", convertNumVal(newNum));
-        pushOperand(OperandStack, operand, convertNumVal(newNum));
-        lastWasNum = 0;
-        //strcpy(newNum, "");
-    }
-    
-    pushOperand(OperandStack, operand, 120);
 }
