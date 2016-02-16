@@ -109,7 +109,7 @@ int convertNumVal(char *string) {
     errno = 0;
     char *end;
     
-    long int newLongInt = strtol(string, &end, 0);
+    long int newLongInt = strtol(string, &end, 10);
     int newInt;
     
     /* Check for various possible errors */
@@ -129,7 +129,7 @@ int convertNumVal(char *string) {
 }
 
 void parseNested(char string[], unsigned long size, Stack **OpStack, Stack **OperandStack) {
-    char *newNum = malloc(strlen(string) + 1);
+    char newNum[] = "";
     int lastWasNum = 0;
     
     for (int x = 0; x < size; x++) {
@@ -140,7 +140,7 @@ void parseNested(char string[], unsigned long size, Stack **OpStack, Stack **Ope
                     printf("PUSHING NUM: %i\n", convertNumVal(newNum));
                     pushOperand(OperandStack, operand, convertNumVal(newNum));
                     lastWasNum = 0;
-                    newNum = "";
+                    strcpy(newNum, "");
                 }
                 pushBinaryOp(OpStack, binaryOperation, Add, '+');
                 break;
@@ -150,23 +150,28 @@ void parseNested(char string[], unsigned long size, Stack **OpStack, Stack **Ope
                     printf("PUSHING NUM: %i\n", convertNumVal(newNum));
                     pushOperand(OperandStack, operand, convertNumVal(newNum));
                     lastWasNum = 0;
-                    newNum = "";
+                    strcpy(newNum, "");
                 }
                 pushBinaryOp(OpStack, binaryOperation, Sub, '-');
                 break;
             default:
                 if (isdigit(string[x])) {
                     lastWasNum = 1;
-                    strcat(newNum, &string[x]);
-                    //newNum += string[x];
+                    unsigned long len = strlen(newNum);
+                    newNum[len] = string[x];
+                    printf("%c\n", newNum[len]);
+                    newNum[len+1] = '\0';
                 }
                 break;
         }
     }
     
     if (lastWasNum) {
+        printf("PUSHING NUM: %i\n", convertNumVal(newNum));
         pushOperand(OperandStack, operand, convertNumVal(newNum));
         lastWasNum = 0;
-        newNum = "";
+        //strcpy(newNum, "");
     }
+    
+    pushOperand(OperandStack, operand, 120);
 }
