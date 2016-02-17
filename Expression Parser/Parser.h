@@ -40,6 +40,8 @@
  * @param size - The size of the string
  * @param OpStack - Pointer to the pointer of the stack data structure that
  * the parsed values should be stored to.
+ * @param OperandStack - Pointer to the pointer of the stack data structure that
+ * the parsed operands should be stored to.
  */
 void parseExpression(char* string, int size, Stack **OpStack, Stack **OperandStack);
 
@@ -52,8 +54,25 @@ void parseExpression(char* string, int size, Stack **OpStack, Stack **OperandSta
  * @param size - The size of the string
  * @param OpStack - Pointer to the pointer of the stack data structure that
  * the parsed values should be stored to.
+ * @param OperandStack - Pointer to the pointer of the stack data structure that
+ * the parsed operands should be stored to.
  */
-void doIt(char string[], unsigned long size, Stack **OpStack,Stack **OperandStack);
+void doIt(char string[], unsigned long size, Stack **OpStack, Stack **OperandStack);
+
+
+/*
+ * parseCommandlineArgs parses all the arguments passed into the application
+ * and puts all the mathematical expressions found in the arguments into Stack
+ * data structures.
+ *
+ * @param args - The number of arguments passed to the application.
+ * @param argv - An array of arguments in the char type.
+ * @param OpStack - Pointer to the pointer of the stack data structure that
+ * the parsed operators should be stored to.
+ * @param OperandStack - Pointer to the pointer of the stack data structure that
+ * the parsed operands should be stored to.
+ */
+void parseCommandlineArgs(int args, const char *argv[], Stack** OpStack, Stack **OperandStack);
 
 /**
  * convertNumVal converts a string of numbers into an integer value.

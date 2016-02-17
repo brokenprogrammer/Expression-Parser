@@ -35,48 +35,14 @@
 
 int main(int argc, const char * argv[]) {
     // insert code here....
-    printf("Hello, World!\n");
-    
-    Stack *root = initWithOperand(5);
-    
-    display(root);
-    
-    printf("Popping top of the stack: %i\n", pop(&root));
-    printf("Popping top of the stack: %i\n", pop(&root));
-    printf("Popping top of the stack: %i\n", pop(&root));
-    printf("Popping top of the stack: %i\n", pop(&root));
-    printf("Popping top of the stack: %i\n", pop(&root));
-    printf("Popping top of the stack: %i\n", pop(&root));
-    
-    display(root);
-    if(isEmpty(root)) {
-        printf("The Stack is empty\n");
-    }
-    
-    if(!isEmpty(root)) {
-        printf("The Stack is not empty\n");
-    }
-    
-    printf("Peeking on the top of the stack: %i\n", peek(&root));
-    
-    pop(&root);
-    
-    printf("Peeking on the top of the stack: %i\n", peek(&root));
-    
-    display(root);
-    
-    deleteStack(&root);
-    
-    display(root);
-   
-    deleteStack(&root);
-    
-    display(root);
     
     Stack *operationStack = initWithOperand(0);
     Stack *operandStack = initWithOperand(0);
     
-    parseExpression("15 +15-20 + 20", 10, &operationStack, &operandStack);
+    //parseExpression("15 +15-20 + 20", 10, &operationStack, &operandStack);
+    
+    //Change command line args from Product -> Scheme -> Edit Scheme then Arguments
+    parseCommandlineArgs(argc, argv, &operationStack, &operandStack);
     
     display(operationStack);
     display(operandStack);

@@ -84,6 +84,8 @@ void doIt(char string[], unsigned long size, Stack **OpStack, Stack **OperandSta
  * @param size - The size of the string
  * @param OpStack - Pointer to the pointer of the stack data structure that
  * the parsed values should be stored to.
+ * @param OperandStack - Pointer to the pointer of the stack data structure that
+ * the parsed operands should be stored to.
  */
 void parseExpression(char* string, int size, Stack **OpStack, Stack **OperandStack) {
     //Allocates a new string and copies the string from the parameters into
@@ -150,6 +152,72 @@ void parseExpression(char* string, int size, Stack **OpStack, Stack **OperandSta
         pch = strtok (NULL, " ");
     }
     free(newstring);
+}
+
+/*
+ * parseCommandlineArgs parses all the arguments passed into the application
+ * and puts all the mathematical expressions found in the arguments into Stack
+ * data structures.
+ *
+ * @param args - The number of arguments passed to the application.
+ * @param argv - An array of arguments in the char type.
+ * @param OpStack - Pointer to the pointer of the stack data structure that
+ * the parsed operators should be stored to.
+ * @param OperandStack - Pointer to the pointer of the stack data structure that
+ * the parsed operands should be stored to.
+ */
+void parseCommandlineArgs(int args, const char *argv[], Stack** OpStack, Stack **OperandStack) {
+    char *newstr = malloc(sizeof(argv[1]));
+    
+    for (int x = 1; x < args; x++) {
+        printf("\narg%d=%s\n", x, argv[x]);
+        realloc(newstr, sizeof(argv[x]));
+        strcpy(newstr, argv[x]);
+        
+        switch (*newstr) {
+            case '+':
+                printf("PLUSS\n");
+                if (strlen(newstr) > 1) {
+                    doIt(newstr, strlen(newstr), OpStack, OperandStack);
+                } else {
+                    pushBinaryOp(OpStack, binaryOperation, Add, '+');
+                }
+                break;
+            case '-':
+                printf("Minus\n");
+                if (strlen(newstr) > 1) {
+                    doIt(newstr, strlen(newstr), OpStack, OperandStack);
+                } else {
+                    pushBinaryOp(OpStack, binaryOperation, Sub, '-');
+                }
+                break;
+            case '*':
+                printf("Multiply\n");
+                if (strlen(newstr) > 1) {
+                    doIt(newstr, strlen(newstr), OpStack, OperandStack);
+                } else {
+                    pushBinaryOp(OpStack, binaryOperation, Multiply, '*');
+                }
+                break;
+            case '/':
+                printf("Divide\n");
+                if (strlen(newstr) > 1) {
+                    doIt(newstr, strlen(newstr), OpStack, OperandStack);
+                } else {
+                    pushBinaryOp(OpStack, binaryOperation, Divide, '/');
+                }
+                break;
+                
+            default:
+                if (isdigit(*newstr)) {
+                    printf("CURRENT NUM: %s\n", newstr);
+                    pushOperand(OperandStack, operand, convertNumVal(newstr));
+                    printf("Converted Value: %i, Pushed value: %f\n", convertNumVal(newstr), (*OperandStack)->operand);
+                }
+                break;
+        }
+    }
+    free(newstr);
 }
 
 /**
