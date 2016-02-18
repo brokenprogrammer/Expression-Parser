@@ -58,3 +58,36 @@ double calculate(Stack **OpStack, Stack **OperandStack) {
     
     return result;
 }
+
+double calculatePolishNotation(Stack *OpStack) {
+    double result = 0;
+    double first = 0;
+    double second = 0;
+    
+    if (!isEmpty(OpStack)) {
+        
+        switch ((OpStack)->opType) {
+            case operand:
+                printf("Operand: %f\n", (OpStack)->operand);
+                return (OpStack)->operand;
+                //return pop(&(*OpStack));
+                break;
+            case constant:
+                
+                break;
+            case unaryOperation:
+                
+                break;
+            case binaryOperation:
+                printf("Binaryop: %c\n", OpStack->symbol);
+                first = calculatePolishNotation(OpStack->next);
+                second = calculatePolishNotation(OpStack->next->next);
+                //pop(OpStack);
+                
+                return result = (OpStack)->BinaryOperation(first, second);
+                break;
+        }
+    }
+    
+    return result;
+}

@@ -279,7 +279,7 @@ void display(Stack *head) {
         if (current->opType == operand) {
             printf("Stack Data: %f, Stack Size: %i\n", current->operand, current->size);
         } else if (current->opType == binaryOperation) {
-            printf("Stack BinaryOperationResult: %f, Stack Size: %i\n", current->BinaryOperation(10, 10), current->size);
+            printf("Stack BinaryOperationResult: %c  %f, Stack Size: %i\n", current->symbol, current->BinaryOperation(10, 10), current->size);
         }
         current = current->next;
     }
@@ -292,7 +292,9 @@ void reverseStack(Stack **head) {
         switch ((*head)->opType) {
             case operand:
                 printf("Current num: %f\n", (*head)->operand);
-                pushOperand(&newStack, operand, (*head)->operand);
+                if ((*head)->operand != 0) {
+                    pushOperand(&newStack, operand, (*head)->operand);
+                }
                 break;
             case constant:
                 
