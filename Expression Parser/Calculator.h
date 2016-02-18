@@ -42,6 +42,6 @@
  */
 double calculate(Stack **OpStack, Stack **OperandStack);
 
-double calculatePolishNotation(Stack *OpStack);
+double calculatePolishNotation(Stack **OpStack);
 
 #endif /* Calculator_h */

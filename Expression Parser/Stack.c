@@ -308,6 +308,6 @@ void reverseStack(Stack **head) {
         }
         pop(head);
     }
+    
     *head = newStack;
-    free(newStack);
 }
