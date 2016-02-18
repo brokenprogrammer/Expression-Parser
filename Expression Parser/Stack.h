@@ -176,4 +176,5 @@ int isEmpty(Stack *head);
  */
 void display(Stack *head);
 
+void reverseStack(Stack **head);
 #endif /* Stack_h */

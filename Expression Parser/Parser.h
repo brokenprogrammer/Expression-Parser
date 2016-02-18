@@ -74,6 +74,18 @@ void doIt(char string[], unsigned long size, Stack **OpStack, Stack **OperandSta
  */
 void parseCommandlineArgs(int args, const char *argv[], Stack** OpStack, Stack **OperandStack);
 
+/*
+ * parsePolishNotation parses all the arguments passed into the application
+ * and puts all the mathematical expressions found in the arguments into a Stack
+ * data structure.
+ *
+ * @param args - The number of arguments passed to the application.
+ * @param argv - An array of arguments in the char type.
+ * @param OpStack - Pointer to the pointer of the stack data structure that
+ * the parsed values should be stored to.
+ */
+void parsePolishNotation(char string[], unsigned long size, Stack **OpStack);
+
 /**
  * convertNumVal converts a string of numbers into an integer value.
  *

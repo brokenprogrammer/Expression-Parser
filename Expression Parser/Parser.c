@@ -220,6 +220,73 @@ void parseCommandlineArgs(int args, const char *argv[], Stack** OpStack, Stack *
     free(newstr);
 }
 
+void parsePolishNotation(char string[], unsigned long size, Stack **OpStack) {
+    //Allocates a new string and copies the string from the parameters into
+    //the new allocated string.
+    char *newstring = malloc(strlen(string) + 1);
+    strcpy(newstring, string);
+    
+    int opPos = 0;
+    
+    char* pch;
+    printf ("Splitting string \"%s\" into tokens:\n", newstring);
+    pch = strtok(newstring, " ");
+    while (pch != NULL)
+    {
+        printf ("%s %lu\n",pch, strlen(pch));
+        
+        switch (*pch) {
+            case '+':
+                printf("PLUSS\n");
+                if (strlen(pch) > 1) {
+                    //doIt(pch, strlen(pch), OpStack, OperandStack);
+                } else {
+                    pushBinaryOp(OpStack, binaryOperation, Add, '+');
+                }
+                opPos = opPos + 1;
+                break;
+            case '-':
+                printf("Minus\n");
+                if (strlen(pch) > 1) {
+                    //doIt(pch, strlen(pch), OpStack, OperandStack);
+                } else {
+                    pushBinaryOp(OpStack, binaryOperation, Sub, '-');
+                }
+                opPos = opPos + 1;
+                break;
+            case '/':
+                printf("Divide\n");
+                if (strlen(pch) > 1) {
+                    //doIt(pch, strlen(pch), OpStack, OperandStack);
+                } else {
+                    pushBinaryOp(OpStack, binaryOperation, Divide, '/');
+                }
+                opPos = opPos + 1;
+                break;
+            case '*':
+                printf("Multiply\n");
+                if (strlen(pch) > 1) {
+                    //doIt(pch, strlen(pch), OpStack, OperandStack);
+                } else {
+                    pushBinaryOp(OpStack, binaryOperation, Multiply, '*');
+                }
+                opPos = opPos + 1;
+                break;
+            default:
+                if (isdigit(*pch)) {
+                    pushOperand(OpStack, operand, convertNumVal(pch));
+                    printf("Converted Value: %i, Pushed value: %f\n", convertNumVal(pch), (*OpStack)->operand);
+                    opPos = opPos + 1;
+                } else {
+                    printf("Dropped unknown value: %s", pch);
+                }
+                break;
+        }
+        pch = strtok (NULL, " ");
+    }
+    free(newstring);
+}
+
 /**
  * convertNumVal converts a string of numbers into an integer value.
  *

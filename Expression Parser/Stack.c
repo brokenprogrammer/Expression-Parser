@@ -284,3 +284,28 @@ void display(Stack *head) {
         current = current->next;
     }
 }
+
+void reverseStack(Stack **head) {
+    Stack *newStack = (Stack *) malloc(sizeof(Stack));
+    
+    while (*head != NULL) {
+        switch ((*head)->opType) {
+            case operand:
+                printf("Current num: %f\n", (*head)->operand);
+                pushOperand(&newStack, operand, (*head)->operand);
+                break;
+            case constant:
+                
+                break;
+            case unaryOperation:
+                pushUnaryOp(&newStack, unaryOperation, (*head)->UnaryOperation, (*head)->symbol);
+                break;
+            case binaryOperation:
+                pushBinaryOp(&newStack, binaryOperation, (*head)->BinaryOperation, (*head)->symbol);
+                break;
+        }
+        pop(head);
+    }
+    *head = newStack;
+    free(newStack);
+}
