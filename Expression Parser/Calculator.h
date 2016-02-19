@@ -42,6 +42,14 @@
  */
 double calculate(Stack **OpStack, Stack **OperandStack);
 
+
+/*
+ * calculatePolishNotation
+ * Calculates an parsed expression using one stack for the operations and
+ * one stack for the operands.
+ *
+ * @param **OpStack      - The stack of operations.
+ */
 double calculatePolishNotation(Stack **OpStack);
 
 #endif /* Calculator_h */

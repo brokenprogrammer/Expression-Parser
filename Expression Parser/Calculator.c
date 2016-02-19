@@ -31,7 +31,7 @@
 /*
  * calculate
  * Calculates an parsed expression using one stack for the operations and
- * one stack for the operands.
+ * two stack for the operands and operators.
  *
  * @param **OpStack      - The stack of operations.
  * @param **OperandStack - The stack of operands.
@@ -59,6 +59,13 @@ double calculate(Stack **OpStack, Stack **OperandStack) {
     return result;
 }
 
+/*
+ * calculatePolishNotation
+ * Calculates an parsed expression using one stack for the operations and
+ * one stack for the operands.
+ *
+ * @param **OpStack      - The stack of operations.
+ */
 double calculatePolishNotation(Stack **OpStack) {
     double result = 0;
     double first = 0;
@@ -70,8 +77,6 @@ double calculatePolishNotation(Stack **OpStack) {
         switch ((*OpStack)->opType) {
             case operand:
                 printf("Operand: %f\n", (*OpStack)->operand);
-                //return (OpStack)->operand;
-                //return
                 result = (*OpStack)->operand;
                 pop(OpStack);
                 return result;
@@ -89,7 +94,6 @@ double calculatePolishNotation(Stack **OpStack) {
                 printf("Binaryop: %c\n", (*OpStack)->symbol);
                 
                 first = calculatePolishNotation(OpStack);
-                
                 second = calculatePolishNotation(OpStack);
                 
                 return result = BinaryOperation(first, second);
