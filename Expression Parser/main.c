@@ -27,8 +27,6 @@
  */
 
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "Stack.h"
 #include "Parser.h"
 #include "Calculator.h"

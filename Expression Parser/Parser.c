@@ -176,7 +176,6 @@ void parseCommandlineArgs(int args, const char *argv[], Stack** OpStack, Stack *
         
         switch (*newstr) {
             case '+':
-                printf("PLUSS\n");
                 if (strlen(newstr) > 1) {
                     doIt(newstr, strlen(newstr), OpStack, OperandStack);
                 } else {
@@ -184,7 +183,6 @@ void parseCommandlineArgs(int args, const char *argv[], Stack** OpStack, Stack *
                 }
                 break;
             case '-':
-                printf("Minus\n");
                 if (strlen(newstr) > 1) {
                     doIt(newstr, strlen(newstr), OpStack, OperandStack);
                 } else {
@@ -192,7 +190,6 @@ void parseCommandlineArgs(int args, const char *argv[], Stack** OpStack, Stack *
                 }
                 break;
             case '*':
-                printf("Multiply\n");
                 if (strlen(newstr) > 1) {
                     doIt(newstr, strlen(newstr), OpStack, OperandStack);
                 } else {
@@ -200,7 +197,6 @@ void parseCommandlineArgs(int args, const char *argv[], Stack** OpStack, Stack *
                 }
                 break;
             case '/':
-                printf("Divide\n");
                 if (strlen(newstr) > 1) {
                     doIt(newstr, strlen(newstr), OpStack, OperandStack);
                 } else {
@@ -210,9 +206,7 @@ void parseCommandlineArgs(int args, const char *argv[], Stack** OpStack, Stack *
                 
             default:
                 if (isdigit(*newstr)) {
-                    printf("CURRENT NUM: %s\n", newstr);
                     pushOperand(OperandStack, operand, convertNumVal(newstr));
-                    printf("Converted Value: %i, Pushed value: %f\n", convertNumVal(newstr), (*OperandStack)->operand);
                 }
                 break;
         }
@@ -231,13 +225,9 @@ void parsePolishNotation(char string[], unsigned long size, Stack **OpStack) {
     char* pch;
     printf ("Splitting string \"%s\" into tokens:\n", newstring);
     pch = strtok(newstring, " ");
-    while (pch != NULL)
-    {
-        printf ("%s %lu\n",pch, strlen(pch));
-        
+    while (pch != NULL) {
         switch (*pch) {
             case '+':
-                printf("PLUSS\n");
                 if (strlen(pch) > 1) {
                     //doIt(pch, strlen(pch), OpStack, OperandStack);
                 } else {
@@ -246,7 +236,6 @@ void parsePolishNotation(char string[], unsigned long size, Stack **OpStack) {
                 opPos = opPos + 1;
                 break;
             case '-':
-                printf("Minus\n");
                 if (strlen(pch) > 1) {
                     //doIt(pch, strlen(pch), OpStack, OperandStack);
                 } else {
@@ -255,7 +244,6 @@ void parsePolishNotation(char string[], unsigned long size, Stack **OpStack) {
                 opPos = opPos + 1;
                 break;
             case '/':
-                printf("Divide\n");
                 if (strlen(pch) > 1) {
                     //doIt(pch, strlen(pch), OpStack, OperandStack);
                 } else {
@@ -264,7 +252,6 @@ void parsePolishNotation(char string[], unsigned long size, Stack **OpStack) {
                 opPos = opPos + 1;
                 break;
             case '*':
-                printf("Multiply\n");
                 if (strlen(pch) > 1) {
                     //doIt(pch, strlen(pch), OpStack, OperandStack);
                 } else {
@@ -275,10 +262,9 @@ void parsePolishNotation(char string[], unsigned long size, Stack **OpStack) {
             default:
                 if (isdigit(*pch)) {
                     pushOperand(OpStack, operand, convertNumVal(pch));
-                    printf("Converted Value: %i, Pushed value: %f\n", convertNumVal(pch), (*OpStack)->operand);
                     opPos = opPos + 1;
                 } else {
-                    printf("Dropped unknown value: %s", pch);
+                    printf("Couldn't parse unknown value: %s", pch);
                 }
                 break;
         }

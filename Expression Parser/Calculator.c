@@ -76,9 +76,9 @@ double calculatePolishNotation(Stack **OpStack) {
         
         switch ((*OpStack)->opType) {
             case operand:
-                printf("Operand: %f\n", (*OpStack)->operand);
                 result = (*OpStack)->operand;
                 pop(OpStack);
+                
                 return result;
                 break;
             case constant:
@@ -90,8 +90,6 @@ double calculatePolishNotation(Stack **OpStack) {
             case binaryOperation:
                 BinaryOperation = (*OpStack)->BinaryOperation;
                 pop(OpStack);
-                
-                printf("Binaryop: %c\n", (*OpStack)->symbol);
                 
                 first = calculatePolishNotation(OpStack);
                 second = calculatePolishNotation(OpStack);

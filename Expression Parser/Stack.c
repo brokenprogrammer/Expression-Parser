@@ -291,7 +291,6 @@ void reverseStack(Stack **head) {
     while (*head != NULL) {
         switch ((*head)->opType) {
             case operand:
-                printf("Current num: %f\n", (*head)->operand);
                 if ((*head)->operand != 0) {
                     pushOperand(&newStack, operand, (*head)->operand);
                 }
