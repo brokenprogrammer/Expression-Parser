@@ -23,7 +23,7 @@ reason behind it is the Stack data structure which is being used during the pars
 ```c
   Stack *operationStack = initWithOperand(0);
   
-  parsePolishNotation("+ - + 15 15 20 20", 10, &operationStack);
+  parsePolishNotation("+ 3 4", 10, &operationStack);
   
   reverseStack(&operationStack);
   
