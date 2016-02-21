@@ -46,7 +46,7 @@
 void parseExpression(char* string, int size, Stack **OpStack, Stack **OperandStack);
 
 /**
- * doIt parses a string of mathematical expressions and puts all the
+ * parseNested parses a string of mathematical expressions and puts all the
  * individual values into a Stack data structure. This function parses nested
  * expressions that is not separated with a space for example "+15-20".
  *
@@ -57,7 +57,7 @@ void parseExpression(char* string, int size, Stack **OpStack, Stack **OperandSta
  * @param OperandStack - Pointer to the pointer of the stack data structure that
  * the parsed operands should be stored to.
  */
-void doIt(char string[], unsigned long size, Stack **OpStack, Stack **OperandStack);
+void parseNested(char string[], unsigned long size, Stack **OpStack, Stack **OperandStack);
 
 
 /*

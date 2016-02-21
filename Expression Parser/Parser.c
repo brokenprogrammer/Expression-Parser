@@ -44,7 +44,7 @@
  * @param OpStack - Pointer to the pointer of the stack data structure that
  * the parsed values should be stored to.
  */
-void doIt(char string[], unsigned long size, Stack **OpStack, Stack **OperandStack) {
+void parseNested(char string[], unsigned long size, Stack **OpStack, Stack **OperandStack) {
     char newstring[size];
     strcpy(newstring, string);
     
@@ -106,7 +106,7 @@ void parseExpression(char* string, int size, Stack **OpStack, Stack **OperandSta
             case '+':
                 printf("PLUSS\n");
                 if (strlen(pch) > 1) {
-                    doIt(pch, strlen(pch), OpStack, OperandStack);
+                    parseNested(pch, strlen(pch), OpStack, OperandStack);
                 } else {
                     pushBinaryOp(OpStack, binaryOperation, Add, '+');
                 }
@@ -115,7 +115,7 @@ void parseExpression(char* string, int size, Stack **OpStack, Stack **OperandSta
             case '-':
                 printf("Minus\n");
                 if (strlen(pch) > 1) {
-                    doIt(pch, strlen(pch), OpStack, OperandStack);
+                    parseNested(pch, strlen(pch), OpStack, OperandStack);
                 } else {
                     pushBinaryOp(OpStack, binaryOperation, Sub, '-');
                 }
@@ -124,7 +124,7 @@ void parseExpression(char* string, int size, Stack **OpStack, Stack **OperandSta
             case '/':
                 printf("Divide\n");
                 if (strlen(pch) > 1) {
-                    doIt(pch, strlen(pch), OpStack, OperandStack);
+                    parseNested(pch, strlen(pch), OpStack, OperandStack);
                 } else {
                     pushBinaryOp(OpStack, binaryOperation, Divide, '/');
                 }
@@ -133,7 +133,7 @@ void parseExpression(char* string, int size, Stack **OpStack, Stack **OperandSta
             case '*':
                 printf("Multiply\n");
                 if (strlen(pch) > 1) {
-                    doIt(pch, strlen(pch), OpStack, OperandStack);
+                    parseNested(pch, strlen(pch), OpStack, OperandStack);
                 } else {
                     pushBinaryOp(OpStack, binaryOperation, Multiply, '*');
                 }
@@ -177,28 +177,28 @@ void parseCommandlineArgs(int args, const char *argv[], Stack** OpStack, Stack *
         switch (*newstr) {
             case '+':
                 if (strlen(newstr) > 1) {
-                    doIt(newstr, strlen(newstr), OpStack, OperandStack);
+                    parseNested(newstr, strlen(newstr), OpStack, OperandStack);
                 } else {
                     pushBinaryOp(OpStack, binaryOperation, Add, '+');
                 }
                 break;
             case '-':
                 if (strlen(newstr) > 1) {
-                    doIt(newstr, strlen(newstr), OpStack, OperandStack);
+                    parseNested(newstr, strlen(newstr), OpStack, OperandStack);
                 } else {
                     pushBinaryOp(OpStack, binaryOperation, Sub, '-');
                 }
                 break;
             case '*':
                 if (strlen(newstr) > 1) {
-                    doIt(newstr, strlen(newstr), OpStack, OperandStack);
+                    parseNested(newstr, strlen(newstr), OpStack, OperandStack);
                 } else {
                     pushBinaryOp(OpStack, binaryOperation, Multiply, '*');
                 }
                 break;
             case '/':
                 if (strlen(newstr) > 1) {
-                    doIt(newstr, strlen(newstr), OpStack, OperandStack);
+                    parseNested(newstr, strlen(newstr), OpStack, OperandStack);
                 } else {
                     pushBinaryOp(OpStack, binaryOperation, Divide, '/');
                 }

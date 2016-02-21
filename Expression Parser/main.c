@@ -35,23 +35,23 @@ int main(int argc, const char * argv[]) {
     // insert code here....
     
     Stack *operationStack = initWithOperand(0);
-    //Stack *operandStack = initWithOperand(0);
+    Stack *operandStack = initWithOperand(0);
     
-    //parseExpression("15 +15-20 + 20", 10, &operationStack, &operandStack);
+    parseExpression("15 +15-20 + 20", 10, &operationStack, &operandStack);
     
     //Change command line args from Product -> Scheme -> Edit Scheme then Arguments
     //parseCommandlineArgs(argc, argv, &operationStack, &operandStack);
     
-    parsePolishNotation("+ - + 15 15 20 20", 10, &operationStack);
+    //parsePolishNotation("+ - + 15 15 20 20", 10, &operationStack);
     
     //display(operationStack);
     //display(operandStack);
     
-    reverseStack(&operationStack);
+    //reverseStack(&operationStack);
     
     display(operationStack);
-    //printf("\n%f\n", calculate(&operationStack, &operandStack));
-    printf("\n%f\n", calculatePolishNotation(&operationStack));
+    printf("\n%f\n", calculate(&operationStack, &operandStack));
+    //printf("\n%f\n", calculatePolishNotation(&operationStack));
     
     return 0;
 }

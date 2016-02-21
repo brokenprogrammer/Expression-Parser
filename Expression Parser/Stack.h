@@ -176,5 +176,13 @@ int isEmpty(Stack *head);
  */
 void display(Stack *head);
 
+/**
+ * reverseStack loops through the entire Stacks linked list and placing all the
+ * content into a new created Stack, that way reversing the content of the
+ * Stack.
+ *
+ * @param **head - The target Stack to loop through its linked elements. And
+ * place in reversed order.
+ */
 void reverseStack(Stack **head);
 #endif /* Stack_h */
