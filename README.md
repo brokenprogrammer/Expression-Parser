@@ -15,6 +15,19 @@ two Stacks and then call the parseExpression function together with the string t
   printf("\n%f\n", calculate(&operationStack, &operandStack));
 ```
 
+#Parse From Command Line
+To parse an expression from the command line you can have this code in main.c
+```c
+  Stack *operationStack = initWithOperand(0);
+  Stack *operandStack = initWithOperand(0);
+  
+  //If on XCode: 
+  //Change command line args from Product -> Scheme -> Edit Scheme then Arguments
+  parseCommandlineArgs(argc, argv, &operationStack, &operandStack);
+  
+  printf("\n%f\n", calculate(&operationStack, &operandStack));
+```
+
 #Parsing Polish Notations
 The feature of parsing polish notations exists as well, if you are not familiar with
 polish notations you can read more about them here: [Polish Notations](https://en.wikipedia.org/wiki/Polish_notation)
@@ -29,3 +42,12 @@ reason behind it is the Stack data structure which is being used during the pars
   
   printf("\n%f\n", calculatePolishNotation(&operationStack));
 ```
+
+#Todo:
+Right now there is no added unary operations to the parser. The functionality to calculate using Unary
+Operations and Constants is there, there is just no known Constants and unary operations added to the
+application.
+I have sometimes experienced bugs with the reverseStack function for the Stack data structure. Where 
+after using it the display function results in an endless loop.
+Recently when i have tried compiling there has been no bugs so i have not found anything more about it.
+If you find any bugs please report them as issues for this repo.
