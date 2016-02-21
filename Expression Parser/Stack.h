@@ -185,4 +185,5 @@ void display(Stack *head);
  * place in reversed order.
  */
 void reverseStack(Stack **head);
+
 #endif /* Stack_h */
